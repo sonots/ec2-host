@@ -25,6 +25,20 @@ shared_examples_for 'host' do
 end
 
 describe EC2::Host do
+  describe 'options' do
+    context do
+      let(:subject) { EC2::Host.new(hostname: 'test', options: {foo:'bar'}) }
+      it { expect(subject.options).to eq({foo:'bar'}) }
+      it { expect(subject.conditions).to eq([{hostname: ['test']}]) }
+    end
+
+    context do
+      let(:subject) { EC2::Host.new({hostname: 'foo'}, {hostname: 'bar'}, options: {foo:'bar'}) }
+      it { expect(subject.options).to eq({foo:'bar'}) }
+      it { expect(subject.conditions).to eq([{hostname: ['foo']}, {hostname: ['bar']}]) }
+    end
+  end
+
   context 'by hostname' do
     let(:hosts) { EC2::Host.new(hostname: 'test').to_a }
     let(:subject)  { hosts.first }

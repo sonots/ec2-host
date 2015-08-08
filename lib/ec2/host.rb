@@ -39,9 +39,6 @@ class EC2
   #
   #     EC2::Host.me.hostname # => 'test'
   class Host
-    ARRAY_TAG_DELIMITER = ','
-    ROLE_TAG_DELIMITER = ':'
-
     include Enumerable
 
     def self.instances
@@ -62,15 +59,43 @@ class EC2
       raise "whoami? #{name} not found"
     end
 
-    # @param [Array of Hash, or Hash] conditions
+    ARRAY_TAG_DELIMITER = ','
+    ROLE_TAG_DELIMITER = ':'
+
+    attr_reader :conditions, :options
+
+    # @param [Array of Hash, or Hash] conditions (and options)
+    #
+    #     EC2::Host.new(
+    #       hostname: 'test',
+    #       options: {a: 'b'}
+    #     )
+    #
+    #     EC2::Host.new(
+    #       {
+    #         hostname: 'foo',
+    #       },
+    #       {
+    #         hostname: 'bar',
+    #       },
+    #       options: {a: 'b'}
+    #     )
     def initialize(*conditions)
-      conditions = [{}]   if conditions.empty?
+      conditions = [{}] if conditions.empty?
       conditions = [conditions] if conditions.kind_of?(Hash)
-      raise ArgumentError, "Array of Hash, or Hash expected" unless conditions.all? {|h| h.kind_of?(Hash)}
+      @options = {}
+      if conditions.size == 1
+        @options = conditions.first.delete(:options) || {}
+      else
+        index = conditions.find_index {|condition| condition.has_key?(:options) }
+        @options = conditions.delete_at(index)[:options] if index
+      end
+      raise ArgumentError, "Hash expected (options)" unless @options.is_a?(Hash)
       @conditions = []
       conditions.each do |condition|
         @conditions << Hash[condition.map {|k, v| [k, Array(v).map(&:to_s)]}]
       end
+      raise ArgumentError, "Array of Hash, or Hash expected (conditions)" unless @conditions.all? {|h| h.kind_of?(Hash)}
     end
 
     # @yieldparam [Host::Data] data entry
