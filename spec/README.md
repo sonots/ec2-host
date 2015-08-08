@@ -15,7 +15,7 @@ OPTIONAL_STRING_TAGS=Service,Status
 
 EC2 instance tags must be configured as followings:
 
-```json
+```
 [
   {
     Name: test
