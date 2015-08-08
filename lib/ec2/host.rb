@@ -47,6 +47,7 @@ class EC2
     def self.instances
       # I do not use describe_instances(filter:) because it does not support array tag ..
       @instances ||= begin
+        Aws.config.update(region: Config.aws_region, credentials: Config.aws_credentials)
         ec2 = Aws::EC2::Client.new
         ec2.describe_instances.reservations.map(&:instances).flatten
       end

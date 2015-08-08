@@ -8,16 +8,25 @@ class EC2
         ENV.fetch('EC2_HOST_CONFIG_FILE', '/etc/sysconfig/ec2-host')
       end
 
+      def self.aws_region
+        ENV['AWS_REGION'] || config.fetch('AWS_REGION')
+      end
+
+      def self.aws_profile
+        ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'default')
+      end
+
       def self.aws_access_key_id
-        ENV['AWS_ACCESS_KEY_ID'] || config.fetch('AWS_ACCESS_KEY_ID')
+        ENV['AWS_ACCESS_KEY_ID'] || config.fetch('AWS_ACCESS_KEY_ID', nil)
       end
 
       def self.aws_secret_access_key
-        ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY')
+        ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY', nil)
       end
 
-      def self.aws_region
-        ENV['AWS_REGION'] || config.fetch('AWS_REGION')
+      # this is not an official aws sdk environment variable
+      def self.aws_credentials_file
+        ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil)
       end
 
       def self.log_level
@@ -41,6 +50,14 @@ class EC2
       end
 
       # private
+
+      def self.aws_credentials
+        if aws_access_key_id and aws_secret_access_key
+          Aws::Credentials.new(aws_access_key_id, aws_secret_access_key)
+        else
+          Aws::SharedCredentials.new(profile_name: aws_profile, path: aws_credentials_file)
+        end
+      end
 
       def self.optional_array_options
         @optional_array_options ||= Hash[optional_array_tags.map {|tag|
