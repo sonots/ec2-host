@@ -1,6 +1,6 @@
 # ec2-host
 
-Search hosts in EC2 instance from Roles tag
+Search hosts on AWS EC2
 
 ## Installation
 
@@ -90,3 +90,8 @@ See [spec/README.md](spec/README.md)
 
 1. Run `./doc.sh`
 2. git commit && git push (to gh-pages branch)
+
+### Licenses
+
+See [LICENSE](LICENSE)
+

@@ -1,14 +1,17 @@
-require 'rubygems'
-
 Gem::Specification.new do |gem|
-  gem.name                  = "ec2-host"
-  gem.version               = '0.0.1'
-  gem.author                = ['Naotoshi Seo']
-  gem.homepage              = 'https://github.com/sonots/ec2-host'
-  gem.license               = 'MIT'
-  gem.files                 = Dir.glob ['{lib,models}/**/*.rb', 'README.md']
-  gem.summary               = "Get hosts on aws ec2 environment"
-  gem.description           = "Get hosts on aws ec2 environment"
+  gem.name          = "ec2-host"
+  gem.version       = '0.0.1'
+  gem.author        = ['Naotoshi Seo']
+  gem.email         = ['sonots@gmail.com']
+  gem.homepage      = 'https://github.com/sonots/ec2-host'
+  gem.summary       = "Search hosts on AWS EC2"
+  gem.description   = "Search hosts on AWS EC2"
+  gem.license       = ['MIT']
+
+  gem.files         = `git ls-files`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency 'aws-sdk'
   gem.add_runtime_dependency 'hashie'
