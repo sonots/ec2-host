@@ -50,11 +50,11 @@ Usage:
 Options:
   -h, [--hostname=one two three]                 # name or private_dns_name
   --usage, [--role=one two three]                # role
-  --r1, --usage1, --u1, [--role1=one two three]  # role1
-  --r2, --usage2, --u2, [--role2=one two three]  # role2
-  --r3, --usage3, --u3, [--role3=one two three]  # role3
-  -i, [--info], [--no-info]                      # Show more info
-              [--debug], [--no-debug]            # Debug mode
+  --r1, --usage1, --u1, [--role1=one two three]  # role1, the 1st part of role delimited by :
+  --r2, --usage2, --u2, [--role2=one two three]  # role2, the 2nd part of role delimited by :
+  --r3, --usage3, --u3, [--role3=one two three]  # role3, the 3rd part of role delimited by :
+  -i, [--info], [--no-info]                      # show host info, not only hostname
+              [--debug], [--no-debug]            # debug mode
 
 Search EC2 hosts
 ```

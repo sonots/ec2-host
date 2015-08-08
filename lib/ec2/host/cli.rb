@@ -18,25 +18,25 @@ class EC2
       option :role1,
         :aliases => %w[--r1 --usage1 --u1], # hmm, -r1 is not suppored by thor
         :type => :array,
-        :desc => "role1"
+        :desc => "role1, the 1st part of role delimited by #{ROLE_TAG_DELIMITER}"
       option :role2,
         :aliases => %w[--r2 --usage2 --u2],
         :type => :array,
-        :desc => "role2"
+        :desc => "role2, the 2nd part of role delimited by #{ROLE_TAG_DELIMITER}"
       option :role3,
         :aliases => %w[--r3 --usage3 --u3],
         :type => :array,
-        :desc => "role3"
+        :desc => "role3, the 3rd part of role delimited by #{ROLE_TAG_DELIMITER}"
       Config.optional_options.each do |opt, tag|
         option opt, :type => :array, :desc => opt
       end
       option :info,
         :aliases => %w[-i],
         :type => :boolean,
-        :desc => "Show more info"
+        :desc => "show host info, not only hostname"
       option :debug,
         :type => :boolean,
-        :desc => "Debug mode"
+        :desc => "debug mode"
       def get_hosts
         if options[:info]
           EC2::Host.new(condition).each do |host|
