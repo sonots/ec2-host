@@ -31,12 +31,25 @@ See [sampel.conf](./sample.conf)
 ```
 $ ec2-host --role1 admin
 host1
-host2
+ip-XXX-XXX-XXX-XXX # if Name tag is not assigned
 ```
 
-See `ec2-host -h` for details:
+See `ec2-host help get-hosts` for details:
 
 ```
+Usage:
+  ec2-host get-hosts
+
+Options:
+  -h, [--hostname=one two three]                 # name or private_dns_name
+  --usage, [--role=one two three]                # role
+  --r1, --usage1, --u1, [--role1=one two three]  # role1
+  --r2, --usage2, --u2, [--role2=one two three]  # role2
+  --r3, --usage3, --u3, [--role3=one two three]  # role3
+  -i, [--info], [--no-info]                      # Show more info
+              [--debug], [--no-debug]            # Debug mode
+
+Search EC2 hosts
 ```
 
 ## Library Usage

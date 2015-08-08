@@ -29,7 +29,7 @@ class EC2
     def initialize(*conditions)
       conditions = [{}]   if conditions.empty?
       conditions = [conditions] if conditions.kind_of?(Hash)
-      raise conditionumentError, "Array of Hash expected" unless conditions.all? {|h| h.kind_of?(Hash)}
+      raise ArgumentError, "Array of Hash, or Hash expected" unless conditions.all? {|h| h.kind_of?(Hash)}
       @conditions = []
       conditions.each do |condition|
         @conditions << Hash[condition.map {|k, v| [k, Array(v).map(&:to_s)]}]

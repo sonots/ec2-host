@@ -41,7 +41,7 @@ class EC2
       # @param [Hash] condition search parameters
       def match?(condition)
         return false unless role_match?(condition)
-        condition = except(condition,
+        condition = HashUtil.except(condition,
           :role, :role1, :role2, :role3,
           :usage, :usage1, :usage2, :usage3
         )
@@ -56,17 +56,20 @@ class EC2
       end
 
       def inspect
-        sprintf "#<Aws::Host::Data %s:%s(%s)[%s][%s][%s]>", \
-          hostname, status, roles.join(' '), tags.join(' '), region, service
+        sprintf "#<Aws::Host::HostData %s>", info
+      end
+
+      def info
+        if hostname and status and roles and tags and service
+          # special treatment for DeNA ;)
+          sprintf "%s:%s(%s)[%s]{%s}", \
+            hostname, status, roles.join(' '), tags.join(' '), service
+        else
+          HashUtil.except(self, :instance).to_s
+        end
       end
 
       # private
-
-      def except(hash, *keys)
-        hash = hash.dup
-        keys.each {|key| hash.delete(key) }
-        hash
-      end
 
       def role_match?(condition)
         # usage is an alias of role
@@ -99,13 +102,15 @@ class EC2
 
       def set_string_tags
         Config.optional_string_tags.each do |tag|
-          self[tag.downcase] = find_string_tag(tag)
+          field = StringUtil.underscore(tag)
+          self[field] = find_string_tag(tag)
         end
       end
 
       def set_array_tags
         Config.optional_array_tags.each do |tag|
-          self[tag.downcase] = find_array_tag(tag)
+          field = StringUtil.underscore(tag)
+          self[field] = find_array_tag(tag)
         end
       end
 

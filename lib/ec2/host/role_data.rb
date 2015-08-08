@@ -53,7 +53,7 @@ class EC2
       end
 
       def inspect
-        sprintf "#<EC2::Host::RoleData %s>", role
+        "\"#{to_s}\""
       end
     end
   end

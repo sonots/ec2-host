@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 class EC2
   class Host
     class Config
@@ -30,14 +33,30 @@ class EC2
       end
 
       def self.optional_array_tags
-        (ENV['OPTIONAL_ARRAY_TAGS'] || config.fetch('OPTIONAL_ARRAY_TAGS', '')).split(',')
+        @optional_array_tags ||= (ENV['OPTIONAL_ARRAY_TAGS'] || config.fetch('OPTIONAL_ARRAY_TAGS', '')).split(',')
       end
 
       def self.optional_string_tags
-        (ENV['OPTIONAL_STRING_TAGS'] || config.fetch('OPTIONAL_STRING_TAGS', '')).split(',')
+        @optional_string_tags ||= (ENV['OPTIONAL_STRING_TAGS'] || config.fetch('OPTIONAL_STRING_TAGS', '')).split(',')
       end
 
-      private
+      # private
+
+      def self.optional_array_options
+        @optional_array_options ||= Hash[optional_array_tags.map {|tag|
+          [StringUtil.singularize(StringUtil.underscore(tag)), tag]
+        }]
+      end
+
+      def self.optional_string_options
+        @optional_string_options ||= Hash[optional_string_tags.map {|tag|
+          [StringUtil.underscore(tag), tag]
+        }]
+      end
+
+      def self.optional_options
+        @optional_options ||= optional_array_options.merge(optional_string_options)
+      end
 
       def self.config
         return @config if @config
