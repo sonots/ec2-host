@@ -2,6 +2,42 @@ require 'socket'
 require 'aws-sdk'
 
 class EC2
+  # Search EC2 hosts from tags
+  #
+  #     require 'ec2-host'
+  #     # Search by `Name` tag
+  #     EC2::Host.new(hostname: 'test').first # => test
+  #
+  #     # Search by `Roles` tag
+  #     EC2::Host.new(
+  #       role: 'admin:haikanko',
+  #     ).each do |host|
+  #       # ...
+  #     end
+  #
+  #     or
+  #
+  #     EC2::Host.new(
+  #       role1: 'admin',
+  #       role2: 'haikanko',
+  #     ).each do |host|
+  #       # ...
+  #     end
+  #
+  #     # Or search
+  #     EC2::Host.new(
+  #       {
+  #           role1: 'db',
+  #           role2: 'master',
+  #       },
+  #       {
+  #           role1: 'web',
+  #       }
+  #     ).each do |host|
+  #         # ...
+  #     end
+  #
+  #     EC2::Host.me.hostname # => 'test'
   class Host
     ARRAY_TAG_DELIMITER = ','
     ROLE_TAG_DELIMITER = ':'
