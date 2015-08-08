@@ -37,7 +37,7 @@ class EC2
 
       # Equality
       #
-      #     Role::Data.new('admin') == Role::Data.new('open', 'admin') #=> true
+      #     Role::Data.new('admin') == Role::Data.new('admin') #=> true
       #     Role::Data.new('admin', 'jenkin') == "admin:jenkins" #=> true
       #
       # @param [Object] other
