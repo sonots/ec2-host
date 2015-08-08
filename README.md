@@ -41,7 +41,7 @@ See `ec2-host -h` for details:
 
 ## Library Usage
 
-See https://github.com//pages/sonots/ec2-host/doc/frames.html. 
+See http://sonots.github.io/ec2-host/doc/frames.html.
 
 ## ChangeLog
 
