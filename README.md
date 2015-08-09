@@ -27,11 +27,18 @@ ec2-host parameters:
   * You can assign multiple roles seperated by `,` comma
   * Also, you can express levels of roles delimited by `:`.
   * Example: admin:ami, then `EC2::Host.new(role: 'admin:ami')` and also `EC2::Host.new(role1: 'admin')` returns this host
-* **OPTIONAL_ARRAY_TAGS**: You may add optional array tags delimited by `,` command.
-* **OPTIONAL_STRING_TAGS**: You may add optional tags
+* **OPTIONAL_STRING_TAGS**: You may add optional non-array tags. You can specify multiple tags like `Service,Status`. 
+* **OPTIONAL_ARRAY_TAGS**: You may add optional array tags. Array tags allows multiple values delimited by `,` (comma) as `Roles` tag.
 * **LOG_LEVEL**: Log level such as `info`, `debug`, `error`. The default is `info`. 
 
 See [sampel.conf](./sample.conf)
+
+## Tag Example
+
+* **Name**: hostname
+* **Roles**: app:web,app:db
+* **Service**: sugoi
+* **Status**: setup
 
 ## CLI Usage
 
