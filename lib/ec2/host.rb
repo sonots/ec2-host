@@ -1,6 +1,3 @@
-require 'socket'
-require 'aws-sdk'
-
 class EC2
   # Search EC2 hosts from tags
   #
@@ -41,25 +38,18 @@ class EC2
   class Host
     include Enumerable
 
-    def self.instances
-      # I do not use describe_instances(filter:) because it does not support array tag ..
-      @instances ||= begin
-        Aws.config.update(region: Config.aws_region, credentials: Config.aws_credentials)
-        ec2 = Aws::EC2::Client.new
-        ec2.describe_instances.reservations.map(&:instances).flatten
-      end
-    end
-
     # @return [Host::Data] representing myself
     def self.me
-      name = Socket.gethostname
-      new(hostname: name).each do |i|
-        return i
+      new(instance_id: ClientUtil.get_instance_id).each do |d|
+        return d
       end
-      raise "whoami? #{name} not found"
+      raise 'Not Found'
     end
 
-    def self.configure(params)
+    # Configure EC2::Host
+    #
+    # @params [Hash] params see EC2::Host::Config for configurable parameters
+    def self.configure(params = {})
       Config.configure(params)
     end
 
@@ -105,7 +95,7 @@ class EC2
     # @yieldparam [Host::Data] data entry
     def each(&block)
       @conditions.each do |condition|
-        search(self.class.instances, condition, &block)
+        search(ClientUtil.get_instances, condition, &block)
       end
       return self
     end
