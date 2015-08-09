@@ -59,6 +59,10 @@ class EC2
       raise "whoami? #{name} not found"
     end
 
+    def self.configure(params)
+      Config.configure(params)
+    end
+
     ARRAY_TAG_DELIMITER = ','
     ROLE_TAG_DELIMITER = ':'
 

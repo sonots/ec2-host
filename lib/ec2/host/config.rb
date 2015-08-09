@@ -4,41 +4,61 @@ Dotenv.load
 class EC2
   class Host
     class Config
+      class << self
+        attr_writer :config_file,
+          :aws_region,
+          :aws_profile,
+          :aws_access_key_id,
+          :aws_secret_access_key,
+          :aws_credentials_file,
+          :log_level,
+          :hostname_tag,
+          :roles_tag,
+          :optional_array_tags,
+          :optional_string_tags
+      end
+
+      def self.configure(params)
+        params.each do |key, val|
+          send("#{key}=", val)
+        end
+      end
+
       def self.config_file
-        ENV.fetch('EC2_HOST_CONFIG_FILE', '/etc/sysconfig/ec2-host')
+        @config_file ||= ENV.fetch('EC2_HOST_CONFIG_FILE', '/etc/sysconfig/ec2-host')
       end
 
       def self.aws_region
-        ENV['AWS_REGION'] || config.fetch('AWS_REGION')
+        @aws_region ||= ENV['AWS_REGION'] || config.fetch('AWS_REGION')
       end
 
       def self.aws_profile
-        ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'default')
+        @aws_profile ||= ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'default')
       end
 
       def self.aws_access_key_id
-        ENV['AWS_ACCESS_KEY_ID'] || config.fetch('AWS_ACCESS_KEY_ID', nil)
+        @aws_access_key_id ||= ENV['AWS_ACCESS_KEY_ID'] || config.fetch('AWS_ACCESS_KEY_ID', nil)
       end
 
       def self.aws_secret_access_key
-        ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY', nil)
+        @aws_secret_access_key ||= ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY', nil)
       end
 
       # this is not an official aws sdk environment variable
       def self.aws_credentials_file
-        ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil)
+        @aws_credentials_file ||= ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil)
       end
 
       def self.log_level
-        ENV['LOG_LEVEL'] || config.fetch('LOG_LEVEL', 'info')
+        @log_level ||= ENV['LOG_LEVEL'] || config.fetch('LOG_LEVEL', 'info')
       end
 
       def self.hostname_tag
-        ENV['HOSTNAME_TAG'] || config.fetch('HOSTNAME_TAG', 'Name')
+        @hostname_tag ||= ENV['HOSTNAME_TAG'] || config.fetch('HOSTNAME_TAG', 'Name')
       end
 
       def self.roles_tag
-        ENV['ROLES_TAG'] || config.fetch('ROLES_TAG', 'Roles')
+        @roles_tag ||= ENV['ROLES_TAG'] || config.fetch('ROLES_TAG', 'Roles')
       end
 
       def self.optional_array_tags
@@ -52,11 +72,12 @@ class EC2
       # private
 
       def self.aws_credentials
-        if aws_access_key_id and aws_secret_access_key
-          Aws::Credentials.new(aws_access_key_id, aws_secret_access_key)
-        else
-          Aws::SharedCredentials.new(profile_name: aws_profile, path: aws_credentials_file)
-        end
+        @aws_credentials ||=
+          if aws_access_key_id and aws_secret_access_key
+            Aws::Credentials.new(aws_access_key_id, aws_secret_access_key)
+          else
+            Aws::SharedCredentials.new(profile_name: aws_profile, path: aws_credentials_file)
+          end
       end
 
       def self.optional_array_options
