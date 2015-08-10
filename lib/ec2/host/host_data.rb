@@ -47,10 +47,11 @@ class EC2
           :usage, :usage1, :usage2, :usage3
         )
         condition.each do |key, values|
-          if self.send(key).is_a?(Array)
-            return false unless self.send(key).find {|v| values.include?(v) }
+          v = get_value(key)
+          if v.is_a?(Array)
+            return false unless v.find {|_| values.include?(_) }
           else
-            return false unless values.include?(self.send(key))
+            return false unless values.include?(v)
           end
         end
         true
@@ -85,6 +86,17 @@ class EC2
       end
 
       # private
+
+      # "instance.instance_id" => self.send("instance").send("instance_id")
+      def get_value(key)
+        v = self
+        key.to_s.split('.').each {|k| v = v.send(k) }
+        v
+      end
+
+      def terminated?
+        state.name == "terminated"
+      end
 
       def role_match?(condition)
         # usage is an alias of role
