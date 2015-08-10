@@ -41,6 +41,9 @@ class EC2
         :aliases => %w[-i],
         :type => :boolean,
         :desc => "show host info, not only hostname"
+      option :json,
+        :type => :boolean,
+        :desc => "show detailed host info in json"
       option :debug,
         :type => :boolean,
         :desc => "debug mode"
@@ -48,6 +51,10 @@ class EC2
         if options[:info]
           EC2::Host.new(condition).each do |host|
             $stdout.puts host.info
+          end
+        elsif options[:json]
+          EC2::Host.new(condition).each do |host|
+            $stdout.puts host.json
           end
         elsif options[:private_ip]
           EC2::Host.new(condition).each do |host|
@@ -68,7 +75,7 @@ class EC2
 
       def condition
         return @condition if @condition
-        _condition = HashUtil.except(options, :info, :debug, :private_ip, :public_ip)
+        _condition = HashUtil.except(options, :info, :json, :debug, :private_ip, :public_ip)
         @condition = {}
         _condition.each do |key, val|
           if tag = Config.optional_options[key.to_s]

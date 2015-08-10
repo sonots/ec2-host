@@ -1,5 +1,6 @@
 require 'forwardable'
 require 'hashie/mash'
+require 'json'
 
 class EC2
   class Host
@@ -70,6 +71,17 @@ class EC2
         else
           HashUtil.except(self, :instance).to_s
         end
+      end
+
+      def json
+        HashUtil.except(self, :instance).merge(
+          instance_id: instance_id,
+          private_ip_address: private_ip_address,
+          public_ip_address: public_ip_address,
+          launch_time: launch_time,
+          state: state.name,
+          monitoring: monitoring.state,
+        ).to_json
       end
 
       # private
