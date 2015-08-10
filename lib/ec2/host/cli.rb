@@ -27,6 +27,9 @@ class EC2
         :aliases => %w[--r3 --usage3 --u3],
         :type => :array,
         :desc => "role3, the 3rd part of role delimited by #{Config.role_tag_delimiter}"
+      option :instance_id,
+        :type => :array,
+        :desc => "instance_id"
       Config.optional_options.each do |opt, tag|
         option opt, :type => :array, :desc => opt
       end
