@@ -1,8 +1,15 @@
+# 0.1.0 (2015/08/11)
+
+Enhancements:
+
+* Alias `--json` to `-j` option
+* Possible speed up for instance_id, role, role1, role2, role3 condition
+
 # 0.0.9 (2015/08/10)
 
 Enhancements:
 
-* Add --state and --monitoring option
+* Add `--state` and `--monitoring` option
 * Remove terminated instances from list as default
 * Support nested key such as instance.instance_id (as library)
 

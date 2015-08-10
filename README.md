@@ -58,13 +58,17 @@ Usage:
 
 Options:
   -h, [--hostname=one two three]                 # name or private_dns_name
-  --usage, [--role=one two three]                # role
+  -r, --usage, -u, [--role=one two three]        # role
   --r1, --usage1, --u1, [--role1=one two three]  # role1, the 1st part of role delimited by :
   --r2, --usage2, --u2, [--role2=one two three]  # role2, the 2nd part of role delimited by :
   --r3, --usage3, --u3, [--role3=one two three]  # role3, the 3rd part of role delimited by :
+              [--instance-id=one two three]      # instance_id
+              [--state=one two three]            # state
+              [--monitoring=one two three]       # monitoring
   --ip, [--private-ip], [--no-private-ip]        # show private ip address instead of hostname
               [--public-ip], [--no-public-ip]    # show public ip address instead of hostname
   -i, [--info], [--no-info]                      # show host info, not only hostname
+  -j, [--json], [--no-json]                      # show detailed host info in json
               [--debug], [--no-debug]            # debug mode
 
 Search EC2 hosts
