@@ -12,7 +12,7 @@ class EC2
         :type => :array,
         :desc => "name or private_dns_name"
       option :role,
-        :aliases => %w[--usage],
+        :aliases => %w[-r --usage -u],
         :type => :array,
         :desc => "role"
       option :role1,
