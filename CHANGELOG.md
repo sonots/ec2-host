@@ -1,3 +1,9 @@
+# 0.0.6 (2015/08/10)
+
+Enhancements:
+
+* Add `--private-ip` (alias to `--ip`) and `--public-ip` options
+
 # 0.0.5 (2015/08/10)
 
 Changes:
