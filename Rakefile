@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
-require 'bundler/setup'
-Bundler.require :default
+require "bundler/gem_tasks"
 
 begin
   require 'rspec/core/rake_task'

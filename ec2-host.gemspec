@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = 'https://github.com/sonots/ec2-host'
   gem.summary       = "Search hosts on AWS EC2"
   gem.description   = "Search hosts on AWS EC2"
-  gem.license       = ['MIT']
+  gem.licenses      = ['MIT']
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
