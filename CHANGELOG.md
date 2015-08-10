@@ -1,3 +1,9 @@
+# 0.0.8 (2015/08/10)
+
+Enhancements:
+
+* Add `--instance-id` option for filtering by instance_id
+
 # 0.0.7 (2015/08/10)
 
 Enhancements:
