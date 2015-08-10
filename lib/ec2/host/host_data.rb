@@ -18,9 +18,9 @@ class EC2
         :instance_id,
         :private_ip_address,
         :public_ip_address,
-        :launch_time,
-        :state,
-        :monitoring
+        :launch_time
+      def state; instance.state.name; end
+      def monitoring; instance.monitoring.state; end
 
       alias_method :ip, :private_ip_address
       alias_method :start_date, :launch_time
@@ -41,7 +41,7 @@ class EC2
       #
       # @param [Hash] condition search parameters
       def match?(condition)
-        return false if terminated? # remove terminated host from lists
+        return false if !condition[:state] and terminated? # remove terminated host from lists as default
         return false unless role_match?(condition)
         condition = HashUtil.except(condition,
           :role, :role1, :role2, :role3,
@@ -81,8 +81,8 @@ class EC2
           private_ip_address: private_ip_address,
           public_ip_address: public_ip_address,
           launch_time: launch_time,
-          state: state.name,
-          monitoring: monitoring.state,
+          state: state,
+          monitoring: monitoring,
         ).to_json
       end
 
@@ -96,7 +96,7 @@ class EC2
       end
 
       def terminated?
-        state.name == "terminated"
+        state == "terminated"
       end
 
       def role_match?(condition)

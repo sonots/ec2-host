@@ -30,6 +30,12 @@ class EC2
       option :instance_id,
         :type => :array,
         :desc => "instance_id"
+      option :state,
+        :type => :array,
+        :desc => "state"
+      option :monitoring,
+        :type => :array,
+        :desc => "monitoring"
       Config.optional_options.each do |opt, tag|
         option opt, :type => :array, :desc => opt
       end
