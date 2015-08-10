@@ -18,15 +18,15 @@ class EC2
       option :role1,
         :aliases => %w[--r1 --usage1 --u1], # hmm, -r1 is not suppored by thor
         :type => :array,
-        :desc => "role1, the 1st part of role delimited by #{ROLE_TAG_DELIMITER}"
+        :desc => "role1, the 1st part of role delimited by #{Config.role_tag_delimiter}"
       option :role2,
         :aliases => %w[--r2 --usage2 --u2],
         :type => :array,
-        :desc => "role2, the 2nd part of role delimited by #{ROLE_TAG_DELIMITER}"
+        :desc => "role2, the 2nd part of role delimited by #{Config.role_tag_delimiter}"
       option :role3,
         :aliases => %w[--r3 --usage3 --u3],
         :type => :array,
-        :desc => "role3, the 3rd part of role delimited by #{ROLE_TAG_DELIMITER}"
+        :desc => "role3, the 3rd part of role delimited by #{Config.role_tag_delimiter}"
       Config.optional_options.each do |opt, tag|
         option opt, :type => :array, :desc => opt
       end

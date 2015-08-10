@@ -121,7 +121,7 @@ class EC2
 
       def find_array_tag(key)
         v = instance.tags.find {|tag| tag.key == key }
-        v ? v.value.split(ARRAY_TAG_DELIMITER) : []
+        v ? v.value.split(Config.array_tag_delimiter) : []
       end
     end
   end

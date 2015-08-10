@@ -53,9 +53,6 @@ class EC2
       Config.configure(params)
     end
 
-    ARRAY_TAG_DELIMITER = ','
-    ROLE_TAG_DELIMITER = ':'
-
     attr_reader :conditions, :options
 
     # @param [Array of Hash, or Hash] conditions (and options)

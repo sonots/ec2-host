@@ -7,13 +7,13 @@ class EC2
     # Represents each role
     class RoleData
       def self.initialize(role)
-        role1, role2, role3 = role.split(ROLE_TAG_DELIMITER)
+        role1, role2, role3 = role.split(Config.role_tag_delimiter)
         self.new(role1, role2, role3)
       end
 
       # @return [String] something like "admin:jenkins:slave"
       def role
-        @role ||= [role1, role2, role3].compact.reject(&:empty?).join(ROLE_TAG_DELIMITER)
+        @role ||= [role1, role2, role3].compact.reject(&:empty?).join(Config.role_tag_delimiter)
       end
       alias :to_s :role
 

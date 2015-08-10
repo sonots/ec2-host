@@ -24,11 +24,13 @@ ec2-host parameters:
 
 * **HOSTNAME_TAG**: EC2 tag key used to express a hostname. The default is `Name`.
 * **ROLES_TAG**: EC2 tag keys used to express roles. The default is `Roles`
-  * You can assign multiple roles seperated by `,` comma
-  * Also, you can express levels of roles delimited by `:`.
+  * You can assign multiple roles seperated by `ARRAY_TAG_DELIMITER` (default: `,`)
+  * Also, you can express levels of roles delimited by `ROLE_TAG_DELIMITER` (default `:`)
   * Example: admin:ami, then `EC2::Host.new(role: 'admin:ami')` and also `EC2::Host.new(role1: 'admin')` returns this host
+* **ROLE_TAG_DELIMITER**: A delimiter to express levels of roles. Default is `:`
 * **OPTIONAL_STRING_TAGS**: You may add optional non-array tags. You can specify multiple tags like `Service,Status`. 
-* **OPTIONAL_ARRAY_TAGS**: You may add optional array tags. Array tags allows multiple values delimited by `,` (comma) as `Roles` tag.
+* **OPTIONAL_ARRAY_TAGS**: You may add optional array tags. Array tags allows multiple values delimited by `ARRAY_TAG_DELIMITER` (default: `,`)
+* **ARRAY_TAG_DELIMITER**: A delimiter to express array. Default is `,`
 * **LOG_LEVEL**: Log level such as `info`, `debug`, `error`. The default is `info`. 
 
 See [sampel.conf](./sample.conf)

@@ -69,6 +69,14 @@ class EC2
         @optional_string_tags ||= (ENV['OPTIONAL_STRING_TAGS'] || config.fetch('OPTIONAL_STRING_TAGS', '')).split(',')
       end
 
+      def self.role_tag_delimiter
+        @role_tag_delimiter ||= ENV['ROLE_TAG_DELIMITER'] || config.fetch('ROLE_TAG_DELIMITER', ':')
+      end
+
+      def self.array_tag_delimiter
+        @array_tag_delimiter ||= ENV['ARRAY_TAG_DELIMITER'] || config.fetch('ARRAY_TAG_DELIMITER', ',')
+      end
+
       # private
 
       def self.aws_credentials
