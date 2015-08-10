@@ -30,6 +30,13 @@ class EC2
       Config.optional_options.each do |opt, tag|
         option opt, :type => :array, :desc => opt
       end
+      option :private_ip,
+        :aliases => %w[--ip],
+        :type => :boolean,
+        :desc => 'show private ip address instead of hostname'
+      option :public_ip,
+        :type => :boolean,
+        :desc => 'show public ip address instead of hostname'
       option :info,
         :aliases => %w[-i],
         :type => :boolean,
@@ -42,6 +49,14 @@ class EC2
           EC2::Host.new(condition).each do |host|
             $stdout.puts host.info
           end
+        elsif options[:private_ip]
+          EC2::Host.new(condition).each do |host|
+            $stdout.puts host.private_ip_address
+          end
+        elsif options[:public_ip]
+          EC2::Host.new(condition).each do |host|
+            $stdout.puts host.public_ip_address
+          end
         else
           EC2::Host.new(condition).each do |host|
             $stdout.puts host.hostname
@@ -53,7 +68,7 @@ class EC2
 
       def condition
         return @condition if @condition
-        _condition = HashUtil.except(options, :info, :debug)
+        _condition = HashUtil.except(options, :info, :debug, :private_ip, :public_ip)
         @condition = {}
         _condition.each do |key, val|
           if tag = Config.optional_options[key.to_s]

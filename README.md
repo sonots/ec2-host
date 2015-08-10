@@ -62,6 +62,8 @@ Options:
   --r1, --usage1, --u1, [--role1=one two three]  # role1, the 1st part of role delimited by :
   --r2, --usage2, --u2, [--role2=one two three]  # role2, the 2nd part of role delimited by :
   --r3, --usage3, --u3, [--role3=one two three]  # role3, the 3rd part of role delimited by :
+  --ip, [--private-ip], [--no-private-ip]        # show private ip address instead of hostname
+              [--public-ip], [--no-public-ip]    # show public ip address instead of hostname
   -i, [--info], [--no-info]                      # show host info, not only hostname
               [--debug], [--no-debug]            # debug mode
 
