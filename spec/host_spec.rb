@@ -39,6 +39,14 @@ describe EC2::Host do
     end
   end
 
+  context 'by instance_id' do
+    let(:hosts) { EC2::Host.new(instance_id: 'i-85900780').to_a }
+    let(:subject)  { hosts.first }
+    it_should_behave_like 'host'
+    it { expect(hosts.size).to eq(1) }
+    it { expect(subject.hostname).to eq('test') }
+  end
+
   context 'by hostname' do
     let(:hosts) { EC2::Host.new(hostname: 'test').to_a }
     let(:subject)  { hosts.first }
@@ -49,6 +57,11 @@ describe EC2::Host do
 
   context 'by role' do
     context 'by a role' do
+      let(:subject) { EC2::Host.new(role: 'admin:ami').first }
+      it_should_behave_like 'host'
+    end
+
+    context 'by a role1' do
       let(:subject) { EC2::Host.new(role1: 'admin').first }
       it_should_behave_like 'host'
     end
@@ -74,6 +87,11 @@ describe EC2::Host do
   # This is for DeNA use
   context 'by usage (an alias of usage)' do
     context 'by a usage' do
+      let(:subject) { EC2::Host.new(usage: 'admin:ami').first }
+      it_should_behave_like 'host'
+    end
+
+    context 'by a usage1' do
       let(:subject) { EC2::Host.new(usage1: 'admin').first }
       it_should_behave_like 'host'
     end

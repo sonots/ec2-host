@@ -40,7 +40,7 @@ class EC2
 
     # @return [Host::Data] representing myself
     def self.me
-      new(instance_id: ClientUtil.get_instance_id).each do |d|
+      new(instance_id: ClientUtil.instance_id).each do |d|
         return d
       end
       raise 'Not Found'
@@ -92,7 +92,7 @@ class EC2
     # @yieldparam [Host::Data] data entry
     def each(&block)
       @conditions.each do |condition|
-        search(ClientUtil.get_instances, condition, &block)
+        search(ClientUtil.instances(condition), condition, &block)
       end
       return self
     end
