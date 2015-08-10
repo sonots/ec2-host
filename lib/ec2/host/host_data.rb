@@ -62,8 +62,11 @@ class EC2
       def info
         if hostname and status and roles and tags and service
           # special treatment for DeNA ;)
-          sprintf "%s:%s(%s)[%s]{%s}", \
-            hostname, status, roles.join(' '), tags.join(' '), service
+          info = "#{hostname}:#{status}"
+          info << "(#{roles.join(' ')})" unless roles.empty?
+          info << "[#{tags.join(' ')}]" unless tags.empty?
+          info << "{#{service}}" unless service.empty?
+          info
         else
           HashUtil.except(self, :instance).to_s
         end
