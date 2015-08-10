@@ -1,3 +1,9 @@
+# 0.0.7 (2015/08/10)
+
+Enhancements:
+
+* Add `--json` option
+
 # 0.0.6 (2015/08/10)
 
 Enhancements:
