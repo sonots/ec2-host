@@ -41,6 +41,7 @@ class EC2
       #
       # @param [Hash] condition search parameters
       def match?(condition)
+        return false if terminated? # remove terminated host from lists
         return false unless role_match?(condition)
         condition = HashUtil.except(condition,
           :role, :role1, :role2, :role3,
