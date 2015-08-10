@@ -51,6 +51,7 @@ class EC2
         :type => :boolean,
         :desc => "show host info, not only hostname"
       option :json,
+        :aliases => %w[-j],
         :type => :boolean,
         :desc => "show detailed host info in json"
       option :debug,
