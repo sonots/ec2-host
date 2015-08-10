@@ -1,3 +1,9 @@
+# 0.0.5 (2015/08/10)
+
+Changes:
+
+* Change the display of --info option
+
 # 0.0.4 (2015/08/10)
 
 Enhancement:
