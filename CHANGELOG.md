@@ -1,3 +1,9 @@
+# 0.0.4 (2015/08/10)
+
+Enhancement:
+
+* Add -r (and -u) option as a short option of --role (and --usage)
+
 # 0.0.3 (2015/08/10)
 
 Enhancement:
