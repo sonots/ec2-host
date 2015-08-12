@@ -71,19 +71,19 @@ class EC2
           info << "{#{service}}" unless service.empty?
           info
         else
-          HashUtil.except(self, :instance).to_s
+          to_hash.to_s
         end
       end
 
-      def json
-        HashUtil.except(self, :instance).merge(
+      def to_hash
+        HashUtil.except(self, :instance).to_h.merge(
           instance_id: instance_id,
           private_ip_address: private_ip_address,
           public_ip_address: public_ip_address,
           launch_time: launch_time,
           state: state,
           monitoring: monitoring,
-        ).to_json
+        )
       end
 
       # private

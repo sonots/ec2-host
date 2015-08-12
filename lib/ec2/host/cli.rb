@@ -49,33 +49,44 @@ class EC2
       option :info,
         :aliases => %w[-i],
         :type => :boolean,
-        :desc => "show host info, not only hostname"
-      option :json,
+        :desc => "show host info"
+      option :line_delimited_json,
         :aliases => %w[-j],
         :type => :boolean,
-        :desc => "show detailed host info in json"
+        :desc => "show host info in line delimited json"
+      option :json,
+        :type => :boolean,
+        :desc => "show host info in json"
+      option :pretty_json,
+        :type => :boolean,
+        :desc => "show host info in pretty json"
       option :debug,
         :type => :boolean,
         :desc => "debug mode"
       def get_hosts
+        hosts = EC2::Host.new(condition)
         if options[:info]
-          EC2::Host.new(condition).each do |host|
+          hosts.each do |host|
             $stdout.puts host.info
           end
-        elsif options[:json]
-          EC2::Host.new(condition).each do |host|
-            $stdout.puts host.json
+        elsif options[:line_delimited_json]
+          hosts.each do |host|
+            $stdout.puts host.to_hash.to_json
           end
+        elsif options[:json]
+          $stdout.puts hosts.map(&:to_hash).to_json
+        elsif options[:pretty_json]
+          $stdout.puts JSON.pretty_generate(hosts.map(&:to_hash))
         elsif options[:private_ip]
-          EC2::Host.new(condition).each do |host|
+          hosts.each do |host|
             $stdout.puts host.private_ip_address
           end
         elsif options[:public_ip]
-          EC2::Host.new(condition).each do |host|
+          hosts.each do |host|
             $stdout.puts host.public_ip_address
           end
         else
-          EC2::Host.new(condition).each do |host|
+          hosts.each do |host|
             $stdout.puts host.hostname
           end
         end
@@ -85,7 +96,7 @@ class EC2
 
       def condition
         return @condition if @condition
-        _condition = HashUtil.except(options, :info, :json, :debug, :private_ip, :public_ip)
+        _condition = HashUtil.except(options, :info, :line_delimited_json, :json, :pretty_json, :debug, :private_ip, :public_ip)
         @condition = {}
         _condition.each do |key, val|
           if tag = Config.optional_options[key.to_s]
