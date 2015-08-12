@@ -44,37 +44,102 @@ See [sampel.conf](./sample.conf)
 
 ## CLI Usage
 
+### CLI Example
+
+```
+$ ec2-host -j
+{"hostname":"test","roles":["admin:ami","test"],"region":"ap-northeast-1","instance_id":"i-85900780","private_ip_address":"172.31.23.50","public_ip_address":null,"launch_time":"2013-09-16 06:14:20 UTC","state":"stopped","monitoring":"disabled"}
+{"hostname":"ip-172-31-6-194","roles":["isucon4:qual"],"region":"ap-northeast-1","instance_id":"i-f88cc8e1","private_ip_address":"172.31.6.194","public_ip_address":null,"launch_time":"2014-10-20 15:57:23 UTC","state":"stopped","monitoring":"disabled"}
+```
+
+```
+$ ec2-host
+test
+ip-172-31-6-194 # if Name tag is not available
+```
+
 ```
 $ ec2-host --role1 admin
-host1
-ip-XXX-XXX-XXX-XXX # if Name tag is not assigned
+test
 ```
 
-See `ec2-host help get-hosts` for details:
+```
+$ ec2-host --role admin:ami
+test
+```
 
 ```
+$ ec2-host --pretty-json
+[
+  {
+    "hostname": "test",
+    "roles": [
+      "admin:ami",
+      "test"
+    ],
+    "region": "ap-northeast-1",
+    "instance_id": "i-85900780",
+    "private_ip_address": "172.31.23.50",
+    "public_ip_address": null,
+    "launch_time": "2013-09-16 06:14:20 UTC",
+    "state": "stopped",
+    "monitoring": "disabled"
+  },
+  {
+    "hostname": "ip-172-31-6-194",
+    "roles": [
+      "isucon4:qual"
+    ],
+    "region": "ap-northeast-1",
+    "instance_id": "i-f88cc8e1",
+    "private_ip_address": "172.31.6.194",
+    "public_ip_address": null,
+    "launch_time": "2014-10-20 15:57:23 UTC",
+    "state": "stopped",
+    "monitoring": "disabled"
+  }
+]
+```
+
+### CLI Help
+
+```
+$ bin/ec2-host help get-hosts
 Usage:
   ec2-host get-hosts
 
 Options:
-  -h, [--hostname=one two three]                 # name or private_dns_name
-  -r, --usage, -u, [--role=one two three]        # role
-  --r1, --usage1, --u1, [--role1=one two three]  # role1, the 1st part of role delimited by :
-  --r2, --usage2, --u2, [--role2=one two three]  # role2, the 2nd part of role delimited by :
-  --r3, --usage3, --u3, [--role3=one two three]  # role3, the 3rd part of role delimited by :
-              [--instance-id=one two three]      # instance_id
-              [--state=one two three]            # state
-              [--monitoring=one two three]       # monitoring
-  --ip, [--private-ip], [--no-private-ip]        # show private ip address instead of hostname
-              [--public-ip], [--no-public-ip]    # show public ip address instead of hostname
-  -i, [--info], [--no-info]                      # show host info, not only hostname
-  -j, [--json], [--no-json]                      # show detailed host info in json
-              [--debug], [--no-debug]            # debug mode
-
-Search EC2 hosts
+  -h, [--hostname=one two three]                           # name or private_dns_name
+  -r, --usage, -u, [--role=one two three]                  # role
+  --r1, --usage1, --u1, [--role1=one two three]            # role1, the 1st part of role delimited by :
+  --r2, --usage2, --u2, [--role2=one two three]            # role2, the 2nd part of role delimited by :
+  --r3, --usage3, --u3, [--role3=one two three]            # role3, the 3rd part of role delimited by :
+              [--instance-id=one two three]                # instance_id
+              [--state=one two three]                      # state
+              [--monitoring=one two three]                 # monitoring
+  --ip, [--private-ip], [--no-private-ip]                  # show private ip address instead of hostname
+              [--public-ip], [--no-public-ip]              # show public ip address instead of hostname
+  -i, [--info], [--no-info]                                # show host info
+  -j, [--line-delimited-json], [--no-line-delimited-json]  # show host info in line delimited json
+              [--json], [--no-json]                        # show host info in json
+              [--pretty-json], [--no-pretty-json]          # show host info in pretty json
+              [--debug], [--no-debug]                      # debug mode
 ```
 
 ## Library Usage
+
+### Library Example
+
+```ruby
+require 'ec2-host'
+
+hosts = EC2::Host.new(role: 'admin:ami')
+hosts.each do |host|
+  puts host
+end
+```
+
+### Library Reference
 
 See http://sonots.github.io/ec2-host/doc/frames.html.
 
