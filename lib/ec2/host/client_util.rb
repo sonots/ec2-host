@@ -6,8 +6,7 @@ class EC2
     class ClientUtil
       def self.ec2(reload = false)
         if @ec2.nil? || reload
-          Aws.config.update(region: Config.aws_region, credentials: Config.aws_credentials)
-          @ec2 = Aws::EC2::Client.new
+          @ec2 = Aws::EC2::Client.new(region: Config.aws_region, credentials: Config.aws_credentials)
         end
         @ec2
       end
