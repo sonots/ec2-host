@@ -1,3 +1,15 @@
+# 0.1.1 (2015/08/11)
+
+Changes:
+
+* Rename `--json` to `--line-delimited-json`. Alias is kept as `-j`.
+* Add `--json` which returns an arrayed json
+* Add `--pretty-json` which returns json in pretty print
+
+Fixes:
+
+* Stop using Aws.config.update, it changes the default config
+
 # 0.1.0 (2015/08/11)
 
 Enhancements:
