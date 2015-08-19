@@ -1,69 +1,96 @@
-require 'thor'
 require 'ec2-host'
+require 'optparse'
 
 class EC2
   class Host
-    class CLI < Thor
-      default_command :get_hosts
+    class CLI
+      attr_reader :options
 
-      desc 'get-hosts', 'Search EC2 hosts (default)'
-      option :hostname,
-        :aliases => '-h',
-        :type => :array,
-        :desc => "name or private_dns_name"
-      option :role,
-        :aliases => %w[-r --usage -u],
-        :type => :array,
-        :desc => "role"
-      option :role1,
-        :aliases => %w[--r1 --usage1 --u1], # hmm, -r1 is not suppored by thor
-        :type => :array,
-        :desc => "role1, the 1st part of role delimited by #{Config.role_tag_delimiter}"
-      option :role2,
-        :aliases => %w[--r2 --usage2 --u2],
-        :type => :array,
-        :desc => "role2, the 2nd part of role delimited by #{Config.role_tag_delimiter}"
-      option :role3,
-        :aliases => %w[--r3 --usage3 --u3],
-        :type => :array,
-        :desc => "role3, the 3rd part of role delimited by #{Config.role_tag_delimiter}"
-      option :instance_id,
-        :type => :array,
-        :desc => "instance_id"
-      option :state,
-        :type => :array,
-        :desc => "state"
-      option :monitoring,
-        :type => :array,
-        :desc => "monitoring"
-      Config.optional_options.each do |opt, tag|
-        option opt, :type => :array, :desc => opt
+      def initialize(argv = ARGV)
+        @options = parse_options(argv)
       end
-      option :private_ip,
-        :aliases => %w[--ip],
-        :type => :boolean,
-        :desc => 'show private ip address instead of hostname'
-      option :public_ip,
-        :type => :boolean,
-        :desc => 'show public ip address instead of hostname'
-      option :info,
-        :aliases => %w[-i],
-        :type => :boolean,
-        :desc => "show host info"
-      option :line_delimited_json,
-        :aliases => %w[-j],
-        :type => :boolean,
-        :desc => "show host info in line delimited json"
-      option :json,
-        :type => :boolean,
-        :desc => "show host info in json"
-      option :pretty_json,
-        :type => :boolean,
-        :desc => "show host info in pretty json"
-      option :debug,
-        :type => :boolean,
-        :desc => "debug mode"
-      def get_hosts
+
+      def parse_options(argv = ARGV)
+        op = OptionParser.new
+
+        self.class.module_eval do
+          define_method(:usage) do |msg = nil|
+            puts op.to_s
+            puts "error: #{msg}" if msg
+            exit 1
+          end
+        end
+
+        opts = {}
+
+        op.on('--hostname one,two,three', Array, "name or private_dns_name") {|v|
+          opts[:hostname] = v
+        }
+        op.on('-r', '--role one,two,three', Array, "role") {|v|
+          opts[:role] = v
+        }
+        op.on('--r1', '--role1 one,two,three', Array, "role1, the 1st part of role delimited by #{Config.role_tag_delimiter}") {|v|
+          opts[:role1] = v
+        }
+        op.on('--r2', '--role2 one,two,three', Array, "role2, the 2st part of role delimited by #{Config.role_tag_delimiter}") {|v|
+          opts[:role2] = v
+        }
+        op.on('--r3', '--role3 one,two,three', Array, "role3, the 3st part of role delimited by #{Config.role_tag_delimiter}") {|v|
+          opts[:role3] = v
+        }
+        op.on('--instance-id one,two,three', Array, "instance_id") {|v|
+          opts[:instance_id] = v
+        }
+        op.on('--state one,two,three', Array, "state") {|v|
+          opts[:state] = v
+        }
+        op.on('--monitoring one,two,three', Array, "monitoring") {|v|
+          opts[:monitoring] = v
+        }
+        Config.optional_options.each do |opt, tag|
+          op.on("--#{opt.to_s.gsub('_', '-')} one,two,three", Array, opt) {|v|
+            opts[opt.to_sym] = v
+          }
+        end
+        op.on('--private-ip', '--ip', "show private ip address instead of hostname") {|v|
+          opts[:private_ip] = v
+        }
+        op.on('--public-ip', "show public ip address instead of hostname") {|v|
+          opts[:public_ip] = v
+        }
+        op.on('-i', '--info', "show host info") {|v|
+          opts[:info] = v
+        }
+        op.on('-j', '--line-delimited-json', "show host info in line delimited json") {|v|
+          opts[:line_delimited_json] = v
+        }
+        op.on('--json', "show host info in json") {|v|
+          opts[:json] = v
+        }
+        op.on('--pretty-json', "show host info in pretty json") {|v|
+          opts[:pretty_json] = v
+        }
+        op.on('--debug', "debug mode") {|v|
+          opts[:debug] = v
+        }
+        op.on('-h', '--help', "show help") {|v|
+          opts[:help] = v
+        }
+
+        begin
+          args = op.parse(argv)
+        rescue OptionParser::InvalidOption => e
+          usage e.message
+        end
+
+        if opts[:help]
+          usage
+        end
+
+        opts
+      end
+
+      def run
         hosts = EC2::Host.new(condition)
         if options[:info]
           hosts.each do |host|

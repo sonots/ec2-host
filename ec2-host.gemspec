@@ -15,7 +15,6 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'aws-sdk'
   gem.add_runtime_dependency 'hashie'
-  gem.add_runtime_dependency 'thor'
   gem.add_runtime_dependency 'dotenv'
 
   gem.add_development_dependency 'yard'

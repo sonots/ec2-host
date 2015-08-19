@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/ec2/host/cli'
-EC2::Host::CLI.start(ARGV)
+EC2::Host::CLI.new(ARGV).run

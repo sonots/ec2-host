@@ -104,26 +104,27 @@ $ ec2-host --pretty-json
 ### CLI Help
 
 ```
-$ bin/ec2-host help get-hosts
-Usage:
-  ec2-host get-hosts
-
-Options:
-  -h, [--hostname=one two three]                           # name or private_dns_name
-  -r, --usage, -u, [--role=one two three]                  # role
-  --r1, --usage1, --u1, [--role1=one two three]            # role1, the 1st part of role delimited by :
-  --r2, --usage2, --u2, [--role2=one two three]            # role2, the 2nd part of role delimited by :
-  --r3, --usage3, --u3, [--role3=one two three]            # role3, the 3rd part of role delimited by :
-              [--instance-id=one two three]                # instance_id
-              [--state=one two three]                      # state
-              [--monitoring=one two three]                 # monitoring
-  --ip, [--private-ip], [--no-private-ip]                  # show private ip address instead of hostname
-              [--public-ip], [--no-public-ip]              # show public ip address instead of hostname
-  -i, [--info], [--no-info]                                # show host info
-  -j, [--line-delimited-json], [--no-line-delimited-json]  # show host info in line delimited json
-              [--json], [--no-json]                        # show host info in json
-              [--pretty-json], [--no-pretty-json]          # show host info in pretty json
-              [--debug], [--no-debug]                      # debug mode
+$ bin/ec2-host --help
+Usage: ec2-host [options]
+        --hostname one,two,three     name or private_dns_name
+    -r, --role one,two,three         role
+        --r1, --role1 one,two,three  role1, the 1st part of role delimited by :
+        --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
+        --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
+        --instance-id one,two,three  instance_id
+        --state one,two,three        state
+        --monitoring one,two,three   monitoring
+        --tag one,two,three          tag
+        --service one,two,three      service
+        --status one,two,three       status
+        --private-ip, --ip           show private ip address instead of hostname
+        --public-ip                  show public ip address instead of hostname
+    -i, --info                       show host info
+    -j, --line-delimited-json        show host info in line delimited json
+        --json                       show host info in json
+        --pretty-json                show host info in pretty json
+        --debug                      debug mode
+    -h, --help                       show help
 ```
 
 ## Library Usage
