@@ -1,3 +1,11 @@
+# 0.2.0 (2015/08/19)
+
+Changes:
+
+* Use optparse instead of thor
+  * Format to specify array option arguments are changed from --option a b c to --option a,b,c
+  * --long_option (underscore) is no longer available, only --long-option (dash) is available
+
 # 0.1.1 (2015/08/11)
 
 Changes:
