@@ -109,7 +109,7 @@ class EC2
           role3 = (condition[:role3] || condition[:usage3] || []).first
         end
         if role1
-          return false unless self.roles.find {|role| role.match?(role1, role2, role3) }
+          return false unless self[:roles].find {|role| role.match?(role1, role2, role3) }
         end
         true
       end
