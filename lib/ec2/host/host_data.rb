@@ -19,12 +19,12 @@ class EC2
         :private_ip_address,
         :public_ip_address,
         :launch_time
-      def state; instance.state.name; end
-      def monitoring; instance.monitoring.state; end
+      def state; self[:instance].state.name; end
+      def monitoring; self[:instance].monitoring.state; end
 
       alias_method :ip, :private_ip_address
       alias_method :start_date, :launch_time
-      def usages; roles; end
+      def usages; self[:roles]; end
 
       def self.initialize(instance)
         d = self.new
@@ -63,12 +63,12 @@ class EC2
       end
 
       def info
-        if hostname and status and roles and tags and service
+        if self[:hostname] and self[:status] and self[:roles] and self[:tags] and self[:service]
           # special treatment for DeNA ;)
-          info = "#{hostname}:#{status}"
-          info << "(#{roles.join(' ')})" unless roles.empty?
-          info << "[#{tags.join(' ')}]" unless tags.empty?
-          info << "{#{service}}" unless service.empty?
+          info = "#{self[:hostname]}:#{self[:status]}"
+          info << "(#{self[:roles].join(' ')})" unless self[:roles].empty?
+          info << "[#{self[:tags].join(' ')}]" unless self[:tags].empty?
+          info << "{#{self[:service]}}" unless self[:service].empty?
           info
         else
           to_hash.to_s
@@ -91,7 +91,7 @@ class EC2
       # "instance.instance_id" => self.send("instance").send("instance_id")
       def get_value(key)
         v = self
-        key.to_s.split('.').each {|k| v = v.send(k) }
+        key.to_s.split('.').each {|k| v = v[k] || v.send(k) }
         v
       end
 
@@ -115,17 +115,17 @@ class EC2
       end
 
       def set_hostname
-        self.hostname = find_string_tag(Config.hostname_tag)
-        self.hostname = instance.private_dns_name.split('.').first if self.hostname.empty?
+        self[:hostname] = find_string_tag(Config.hostname_tag)
+        self[:hostname] = self[:instance].private_dns_name.split('.').first if self[:hostname].empty?
       end
 
       def set_roles
         roles  = find_array_tag(Config.roles_tag)
-        self.roles = roles.map {|role| EC2::Host::RoleData.initialize(role) }
+        self[:roles] = roles.map {|role| EC2::Host::RoleData.initialize(role) }
       end
 
       def set_region
-        self.region = Config.aws_region
+        self[:region] = Config.aws_region
       end
 
       def set_string_tags

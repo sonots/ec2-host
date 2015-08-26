@@ -39,6 +39,12 @@ describe EC2::Host do
     end
   end
 
+  describe '#get_value' do
+    let(:hosts) { EC2::Host.new(instance_id: 'i-85900780').to_a }
+    let(:subject)  { hosts.first }
+    it { expect(subject.get_value('instance.instance_id')).to eql('i-85900780') }
+  end
+
   context 'by instance_id' do
     let(:hosts) { EC2::Host.new(instance_id: 'i-85900780').to_a }
     let(:subject)  { hosts.first }
