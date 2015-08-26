@@ -1,3 +1,9 @@
+# 0.2.1 (2015/08/26)
+
+Fixes:
+
+* Fix to be able to use together with capistrano 3
+
 # 0.2.0 (2015/08/19)
 
 Changes:
