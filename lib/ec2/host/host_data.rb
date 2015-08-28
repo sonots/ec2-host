@@ -41,7 +41,7 @@ class EC2
       #
       # @param [Hash] condition search parameters
       def match?(condition)
-        return false if !condition[:state] and terminated? # remove terminated host from lists as default
+        return false if !condition[:state] and (terminated? or shutting_down? or stopping?)
         return false unless role_match?(condition)
         condition = HashUtil.except(condition,
           :role, :role1, :role2, :role3,
@@ -97,6 +97,22 @@ class EC2
 
       def terminated?
         state == "terminated"
+      end
+
+      def shutting_down?
+        state == "shutting-down"
+      end
+
+      def stopping?
+        state == "stopping"
+      end
+
+      def running?
+        state == "running"
+      end
+
+      def pending?
+        state == "pending"
       end
 
       def role_match?(condition)
