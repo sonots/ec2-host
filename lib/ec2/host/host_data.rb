@@ -41,7 +41,7 @@ class EC2
       #
       # @param [Hash] condition search parameters
       def match?(condition)
-        return false if !condition[:state] and (terminated? or shutting_down? or stopping?)
+        return false if !condition[:state] and (terminated? or shutting_down?)
         return false unless role_match?(condition)
         condition = HashUtil.except(condition,
           :role, :role1, :role2, :role3,
@@ -105,6 +105,10 @@ class EC2
 
       def stopping?
         state == "stopping"
+      end
+
+      def stopped
+        state == "stopped"
       end
 
       def running?
