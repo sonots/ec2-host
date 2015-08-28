@@ -1,3 +1,9 @@
+# 0.2.2 (2015/08/28)
+
+Changes:
+
+* Remove stopping and shutting-down hosts from lists in addition to terminated as default
+
 # 0.2.1 (2015/08/26)
 
 Fixes:
