@@ -120,7 +120,7 @@ Usage: ec2-host [options]
         --private-ip, --ip           show private ip address instead of hostname
         --public-ip                  show public ip address instead of hostname
     -i, --info                       show host info
-    -j, --line-delimited-json        show host info in line delimited json
+    -j, --jsonl                      show host info in line delimited json
         --json                       show host info in json
         --pretty-json                show host info in pretty json
         --debug                      debug mode

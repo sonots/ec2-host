@@ -61,8 +61,8 @@ class EC2
         op.on('-i', '--info', "show host info") {|v|
           opts[:info] = v
         }
-        op.on('-j', '--line-delimited-json', "show host info in line delimited json") {|v|
-          opts[:line_delimited_json] = v
+        op.on('-j', '--jsonl', "show host info in line delimited json") {|v|
+          opts[:jsonl] = v
         }
         op.on('--json', "show host info in json") {|v|
           opts[:json] = v
@@ -96,7 +96,7 @@ class EC2
           hosts.each do |host|
             $stdout.puts host.info
           end
-        elsif options[:line_delimited_json]
+        elsif options[:jsonl]
           hosts.each do |host|
             $stdout.puts host.to_hash.to_json
           end
@@ -123,7 +123,7 @@ class EC2
 
       def condition
         return @condition if @condition
-        _condition = HashUtil.except(options, :info, :line_delimited_json, :json, :pretty_json, :debug, :private_ip, :public_ip)
+        _condition = HashUtil.except(options, :info, :jsonl, :json, :pretty_json, :debug, :private_ip, :public_ip)
         @condition = {}
         _condition.each do |key, val|
           if tag = Config.optional_options[key.to_s]

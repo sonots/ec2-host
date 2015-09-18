@@ -1,3 +1,9 @@
+# 0.2.4 (2015/09/18)
+
+Changes:
+
+* Change --line-delimited-json option to --jsonl. See http://jsonlines.org/
+
 # 0.2.3 (2015/08/28)
 
 Changes:
