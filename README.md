@@ -48,8 +48,8 @@ See [sample.conf](./sample.conf)
 
 ```
 $ ec2-host -j
-{"hostname":"test","roles":["admin:ami","test"],"region":"ap-northeast-1","instance_id":"i-85900780","private_ip_address":"172.31.23.50","public_ip_address":null,"launch_time":"2013-09-16 06:14:20 UTC","state":"stopped","monitoring":"disabled"}
-{"hostname":"ip-172-31-6-194","roles":["isucon4:qual"],"region":"ap-northeast-1","instance_id":"i-f88cc8e1","private_ip_address":"172.31.6.194","public_ip_address":null,"launch_time":"2014-10-20 15:57:23 UTC","state":"stopped","monitoring":"disabled"}
+{"hostname":"test","roles":["admin:ami","test"],"region":"ap-northeast-1","instance_id":"i-85900780","private_ip_address":"172.31.23.50","public_ip_address":null,"launch_time":"2013-09-16 06:14:20 UTC","state":"running","monitoring":"disabled"}
+{"hostname":"ip-172-31-6-194","roles":["isucon4:qual"],"region":"ap-northeast-1","instance_id":"i-f88cc8e1","private_ip_address":"172.31.6.194","public_ip_address":null,"launch_time":"2014-10-20 15:57:23 UTC","state":"running","monitoring":"disabled"}
 ```
 
 ```
@@ -82,7 +82,7 @@ $ ec2-host --pretty-json
     "private_ip_address": "172.31.23.50",
     "public_ip_address": null,
     "launch_time": "2013-09-16 06:14:20 UTC",
-    "state": "stopped",
+    "state": "running",
     "monitoring": "disabled"
   },
   {
@@ -95,7 +95,7 @@ $ ec2-host --pretty-json
     "private_ip_address": "172.31.6.194",
     "public_ip_address": null,
     "launch_time": "2014-10-20 15:57:23 UTC",
-    "state": "stopped",
+    "state": "running",
     "monitoring": "disabled"
   }
 ]
@@ -112,11 +112,8 @@ Usage: ec2-host [options]
         --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
         --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
         --instance-id one,two,three  instance_id
-        --state one,two,three        state
+        --state one,two,three        state (default: running)
         --monitoring one,two,three   monitoring
-        --tag one,two,three          tag
-        --service one,two,three      service
-        --status one,two,three       status
         --private-ip, --ip           show private ip address instead of hostname
         --public-ip                  show public ip address instead of hostname
     -i, --info                       show host info
