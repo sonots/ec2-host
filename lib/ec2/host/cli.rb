@@ -21,7 +21,9 @@ class EC2
           end
         end
 
-        opts = {}
+        opts = {
+          state: ["running"]
+        }
 
         op.on('--hostname one,two,three', Array, "name or private_dns_name") {|v|
           opts[:hostname] = v
@@ -41,7 +43,7 @@ class EC2
         op.on('--instance-id one,two,three', Array, "instance_id") {|v|
           opts[:instance_id] = v
         }
-        op.on('--state one,two,three', Array, "state") {|v|
+        op.on('--state one,two,three', Array, "instance state (default: running)") {|v|
           opts[:state] = v
         }
         op.on('--monitoring one,two,three', Array, "monitoring") {|v|
