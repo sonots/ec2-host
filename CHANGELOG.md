@@ -1,3 +1,9 @@
+# 0.3.1 (2016/04/21)
+
+Enhancements:
+
+* Add --all option
+
 # 0.3.0 (2016/04/21)
 
 Changes:
