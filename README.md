@@ -112,8 +112,9 @@ Usage: ec2-host [options]
         --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
         --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
         --instance-id one,two,three  instance_id
-        --state one,two,three        state (default: running)
-        --monitoring one,two,three   monitoring
+        --state one,two,three        filter with instance state (default: running)
+        --monitoring one,two,three   filter with instance monitoring
+    -a, --all                        list all hosts (remove default filter)
         --private-ip, --ip           show private ip address instead of hostname
         --public-ip                  show public ip address instead of hostname
     -i, --info                       show host info
