@@ -1,3 +1,9 @@
+# 0.3.0 (2016/04/21)
+
+Changes:
+
+* List only running hosts as default via CLI
+
 # 0.2.4 (2015/09/18)
 
 Changes:
