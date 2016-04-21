@@ -43,10 +43,10 @@ class EC2
         op.on('--instance-id one,two,three', Array, "instance_id") {|v|
           opts[:instance_id] = v
         }
-        op.on('--state one,two,three', Array, "instance state (default: running)") {|v|
+        op.on('--state one,two,three', Array, "filter with instance state (default: running)") {|v|
           opts[:state] = v
         }
-        op.on('--monitoring one,two,three', Array, "monitoring") {|v|
+        op.on('--monitoring one,two,three', Array, "filter with instance monitoring") {|v|
           opts[:monitoring] = v
         }
         Config.optional_options.each do |opt, tag|
@@ -54,6 +54,14 @@ class EC2
             opts[opt.to_sym] = v
           }
         end
+        op.on('-a', '--all', "list all hosts (remove default filter)") {|v|
+          [:hostname, :role, :role1, :role2, :role3, :instance_id, :state, :monitoring].each do |key|
+            opts.delete(key)
+          end
+          Config.optional_options.each do |opt, tag|
+            opts.delete(opt.to_sym)
+          end
+        }
         op.on('--private-ip', '--ip', "show private ip address instead of hostname") {|v|
           opts[:private_ip] = v
         }
