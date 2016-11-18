@@ -140,7 +140,7 @@ end
 
 ### Library Reference
 
-See http://sonots.github.io/ec2-host/doc/frames.html.
+See http://sonots.github.io/ec2-host/frames.html.
 
 ## ChangeLog
 
