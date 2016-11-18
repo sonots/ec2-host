@@ -33,7 +33,7 @@ ec2-host parameters:
 * **ARRAY_TAG_DELIMITER (optional)**: A delimiter to express array. Default is `,`
 * **LOG_LEVEL (optional)**: Log level such as `info`, `debug`, `error`. The default is `info`. 
 
-See [sample.conf](./sample.conf)
+See [example.conf](./example/example.conf)
 
 ## Tag Example
 
