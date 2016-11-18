@@ -167,8 +167,8 @@ See [spec/README.md](spec/README.md)
 
 ### How to Update doc
 
-1. Run `./doc.sh`
-2. git commit && git push (to gh-pages branch)
+1. Run `bundle exec yard`
+2. git commit && git push
 
 ### Licenses
 

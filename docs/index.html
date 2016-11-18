@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-ec2-host">ec2-host</h1>
+
+<p>Search hosts on AWS EC2</p>
+
+<h2 id="label-Installation">Installation</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_ec2'>ec2</span><span class='op'>-</span><span class='id identifier rubyid_host'>host</span>
+</code></pre>
+
+<h2 id="label-Configuration">Configuration</h2>
+
+<p>You can write a configuration file located at
+<code>/etc/sysconfig/ec2-host</code> (You can configure this path by
+<code>EC2_HOST_CONFIG_FILE</code> environment variable), or as environment
+variables:</p>
+
+<p>AWS SDK (CLI) parameters:</p>
+<ul><li>
+<p><strong>AWS_REGION</strong>; AWS SDK (CLI) region such as
+<code>ap-northeast-1</code>, <code>us-east-1</code>.</p>
+</li><li>
+<p><strong>AWS_ACCESS_KEY_ID</strong>: AWS SDK (CLI) crendentials. Default
+loads a credentials file</p>
+</li><li>
+<p><strong>AWS_SECRET_ACCESS_KEY</strong>: AWS SDK (CLI) credentials. Default
+load a credentials file</p>
+</li><li>
+<p><strong>AWS_PROFILE</strong>: The profile key of the AWS SDK (CLI)
+credentails file. Default is <code>default</code></p>
+</li><li>
+<p><strong>AWS_CREDENTIALS_FILE</strong>: Path of the AWS SDK (CLI)
+credentails file. Default is <code>$HOME/.aws/credentials</code>. See <a
+href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files">Configuring
+the AWS Command Line Interface</a> for details.</p>
+</li></ul>
+
+<p>ec2-host parameters:</p>
+<ul><li>
+<p><strong>HOSTNAME_TAG (optional)</strong>: EC2 tag key used to express a
+hostname. The default is <code>Name</code>.</p>
+</li><li>
+<p><strong>ROLES_TAG (optional)</strong>: EC2 tag keys used to express roles.
+The default is <code>Roles</code></p>
+</li><li>
+<p>You can assign multiple roles seperated by <code>ARRAY_TAG_DELIMITER</code>
+(default: <code>,</code>)</p>
+</li><li>
+<p>Also, you can express levels of roles delimited by
+<code>ROLE_TAG_DELIMITER</code> (default <code>:</code>)</p>
+</li><li>
+<p>Example: admin:ami, then <code>EC2::Host.new(role:
+&#39;admin:ami&#39;)</code> and also <code>EC2::Host.new(role1:
+&#39;admin&#39;)</code> returns this host</p>
+</li><li>
+<p><strong>ROLE_TAG_DELIMITER (optional)</strong>: A delimiter to express
+levels of roles. Default is <code>:</code></p>
+</li><li>
+<p><strong>OPTIONAL_STRING_TAGS (optional)</strong>: You may add optional
+non-array tags. You can specify multiple tags like
+<code>Service,Status</code>.</p>
+</li><li>
+<p><strong>OPTIONAL_ARRAY_TAGS (optional)</strong>: You may add optional array
+tags. Array tags allows multiple values delimited by
+<code>ARRAY_TAG_DELIMITER</code> (default: <code>,</code>)</p>
+</li><li>
+<p><strong>ARRAY_TAG_DELIMITER (optional)</strong>: A delimiter to express
+array. Default is <code>,</code></p>
+</li><li>
+<p><strong>LOG_LEVEL (optional)</strong>: Log level such as <code>info</code>,
+<code>debug</code>, <code>error</code>. The default is <code>info</code>.</p>
+</li></ul>
+
+<p>See <a href="./sample.conf">sample.conf</a></p>
+
+<h2 id="label-Tag+Example">Tag Example</h2>
+<ul><li>
+<p><strong>Name</strong>: hostname</p>
+</li><li>
+<p><strong>Roles</strong>: app:web,app:db</p>
+</li><li>
+<p><strong>Service</strong>: sugoi</p>
+</li><li>
+<p><strong>Status</strong>: setup</p>
+</li></ul>
+
+<h2 id="label-CLI+Usage">CLI Usage</h2>
+
+<h3 id="label-CLI+Example">CLI Example</h3>
+
+<pre class="code ruby"><code class="ruby">$ ec2-host -j
+{&quot;hostname&quot;:&quot;test&quot;,&quot;roles&quot;:[&quot;admin:ami&quot;,&quot;test&quot;],&quot;region&quot;:&quot;ap-northeast-1&quot;,&quot;instance_id&quot;:&quot;i-85900780&quot;,&quot;private_ip_address&quot;:&quot;172.31.23.50&quot;,&quot;public_ip_address&quot;:null,&quot;launch_time&quot;:&quot;2013-09-16 06:14:20 UTC&quot;,&quot;state&quot;:&quot;running&quot;,&quot;monitoring&quot;:&quot;disabled&quot;}
+{&quot;hostname&quot;:&quot;ip-172-31-6-194&quot;,&quot;roles&quot;:[&quot;isucon4:qual&quot;],&quot;region&quot;:&quot;ap-northeast-1&quot;,&quot;instance_id&quot;:&quot;i-f88cc8e1&quot;,&quot;private_ip_address&quot;:&quot;172.31.6.194&quot;,&quot;public_ip_address&quot;:null,&quot;launch_time&quot;:&quot;2014-10-20 15:57:23 UTC&quot;,&quot;state&quot;:&quot;running&quot;,&quot;monitoring&quot;:&quot;disabled&quot;}</code></pre>
+
+<pre class="code ruby"><code class="ruby">$ ec2-host
+test
+ip-172-31-6-194 # if Name tag is not available</code></pre>
+
+<pre class="code ruby"><code class="ruby">$ ec2-host --role1 admin
+test</code></pre>
+
+<pre class="code ruby"><code class="ruby">$ ec2-host --role admin:ami
+test</code></pre>
+
+<pre class="code ruby"><code class="ruby">$ ec2-host --pretty-json
+[
+  {
+    &quot;hostname&quot;: &quot;test&quot;,
+    &quot;roles&quot;: [
+      &quot;admin:ami&quot;,
+      &quot;test&quot;
+    ],
+    &quot;region&quot;: &quot;ap-northeast-1&quot;,
+    &quot;instance_id&quot;: &quot;i-85900780&quot;,
+    &quot;private_ip_address&quot;: &quot;172.31.23.50&quot;,
+    &quot;public_ip_address&quot;: null,
+    &quot;launch_time&quot;: &quot;2013-09-16 06:14:20 UTC&quot;,
+    &quot;state&quot;: &quot;running&quot;,
+    &quot;monitoring&quot;: &quot;disabled&quot;
+  },
+  {
+    &quot;hostname&quot;: &quot;ip-172-31-6-194&quot;,
+    &quot;roles&quot;: [
+      &quot;isucon4:qual&quot;
+    ],
+    &quot;region&quot;: &quot;ap-northeast-1&quot;,
+    &quot;instance_id&quot;: &quot;i-f88cc8e1&quot;,
+    &quot;private_ip_address&quot;: &quot;172.31.6.194&quot;,
+    &quot;public_ip_address&quot;: null,
+    &quot;launch_time&quot;: &quot;2014-10-20 15:57:23 UTC&quot;,
+    &quot;state&quot;: &quot;running&quot;,
+    &quot;monitoring&quot;: &quot;disabled&quot;
+  }
+]</code></pre>
+
+<h3 id="label-CLI+Help">CLI Help</h3>
+
+<pre class="code ruby"><code class="ruby">$ bin/ec2-host --help
+Usage: ec2-host [options]
+        --hostname one,two,three     name or private_dns_name
+    -r, --role one,two,three         role
+        --r1, --role1 one,two,three  role1, the 1st part of role delimited by :
+        --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
+        --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
+        --instance-id one,two,three  instance_id
+        --state one,two,three        filter with instance state (default: running)
+        --monitoring one,two,three   filter with instance monitoring
+    -a, --all                        list all hosts (remove default filter)
+        --private-ip, --ip           show private ip address instead of hostname
+        --public-ip                  show public ip address instead of hostname
+    -i, --info                       show host info
+    -j, --jsonl                      show host info in line delimited json
+        --json                       show host info in json
+        --pretty-json                show host info in pretty json
+        --debug                      debug mode
+    -h, --help                       show help</code></pre>
+
+<h2 id="label-Library+Usage">Library Usage</h2>
+
+<h3 id="label-Library+Example">Library Example</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ec2-host</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_hosts'>hosts</span> <span class='op'>=</span> <span class='const'>EC2</span><span class='op'>::</span><span class='const'>Host</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>role:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin:ami</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_hosts'>hosts</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_host'>host</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_host'>host</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h3 id="label-Library+Reference">Library Reference</h3>
+
+<p>See <a
+href="http://sonots.github.io/ec2-host/doc/frames.html">sonots.github.io/ec2-host/doc/frames.html</a>.</p>
+
+<h2 id="label-ChangeLog">ChangeLog</h2>
+
+<p>See <a href="CHANGELOG.md">CHANGELOG.md</a> for details.</p>
+
+<h2 id="label-For+Developers">For Developers</h2>
+
+<h3 id="label-ToDo">ToDo</h3>
+<ul><li>
+<p>Support assume-roles</p>
+</li><li>
+<p>Use mock/stub to run test (currently, directly accessing to EC2)</p>
+</li><li>
+<p>Should cache a result of describe-instances in like 30 seconds?</p>
+</li></ul>
+
+<h3 id="label-How+to+Run+test">How to Run test</h3>
+
+<p>See <a href="spec/README.md">spec/README.md</a></p>
+
+<h3 id="label-How+to+Release+Gem">How to Release Gem</h3>
+<ol><li>
+<p>Update gem.version in the gemspec</p>
+</li><li>
+<p>Update CHANGELOG.md</p>
+</li><li>
+<p>git commit &amp;&amp; git push</p>
+</li><li>
+<p>Run <code>bundle exec rake release</code></p>
+</li></ol>
+
+<h3 id="label-How+to+Update+doc">How to Update doc</h3>
+<ol><li>
+<p>Run <code>./doc.sh</code></p>
+</li><li>
+<p>git commit &amp;&amp; git push (to gh-pages branch)</p>
+</li></ol>
+
+<h3 id="label-Licenses">Licenses</h3>
+
+<p>See <a href="LICENSE">LICENSE</a></p>
+</div></div>
+
+    <div id="footer">
+  Generated on Fri Nov 18 23:47:46 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.2).
+</div>
+
+  </body>
+</html>

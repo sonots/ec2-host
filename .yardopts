@@ -1,0 +1,6 @@
+--no-private
+--protected
+--output-dir docs
+-
+README.md
+LICENSE.txt
