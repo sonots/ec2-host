@@ -8,6 +8,13 @@ Search hosts on AWS EC2
 gem install ec2-host
 ```
 
+## How it works
+
+This gems uses [tagging of EC2 resources](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+You can configure, but basically use `Name` tag for hostname (this is default of EC2) and `Roles` tag for roles.
+
+You can manage roles of a host, and search hosts having a specified role using thease tags with this gem.
+
 ## Configuration
 
 You can write a configuration file located at `/etc/sysconfig/ec2-host` (You can configure this path by `EC2_HOST_CONFIG_FILE` environment variable), or as environment variables:
