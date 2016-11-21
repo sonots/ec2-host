@@ -40,7 +40,7 @@ class EC2
 
     # @return [Host::Data] representing myself
     def self.me
-      new(instance_id: ClientUtil.instance_id).each do |d|
+      new(instance_id: ec2_client.instance_id).each do |d|
         return d
       end
       raise 'Not Found'
@@ -51,6 +51,14 @@ class EC2
     # @params [Hash] params see EC2::Host::Config for configurable parameters
     def self.configure(params = {})
       Config.configure(params)
+    end
+
+    def self.ec2_client
+      @ec2_client ||= EC2Client.new
+    end
+
+    def ec2_client
+      self.class.ec2_client
     end
 
     attr_reader :conditions, :options
@@ -92,7 +100,7 @@ class EC2
     # @yieldparam [Host::Data] data entry
     def each(&block)
       @conditions.each do |condition|
-        search(ClientUtil.instances(condition), condition, &block)
+        search(ec2_client.instances(condition), condition, &block)
       end
       return self
     end

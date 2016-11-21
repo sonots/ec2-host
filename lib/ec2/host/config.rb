@@ -79,15 +79,6 @@ class EC2
 
       # private
 
-      def self.aws_credentials
-        @aws_credentials ||=
-          if aws_access_key_id and aws_secret_access_key
-            Aws::Credentials.new(aws_access_key_id, aws_secret_access_key)
-          else
-            Aws::SharedCredentials.new(profile_name: aws_profile, path: aws_credentials_file)
-          end
-      end
-
       def self.optional_array_options
         @optional_array_options ||= Hash[optional_array_tags.map {|tag|
           [StringUtil.singularize(StringUtil.underscore(tag)), tag]
