@@ -421,30 +421,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#aws_credentials-class_method" title="aws_credentials (class method)">+ (Object) <strong>aws_credentials</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>private.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#config-class_method" title="config (class method)">+ (Object) <strong>config</strong> </a>
     
 
@@ -503,7 +479,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>private.</p>
+</div></span>
   
 </li>
 
@@ -982,57 +960,6 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="aws_credentials-class_method">
-  
-    + (<tt>Object</tt>) <strong>aws_credentials</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>private</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-82
-83
-84
-85
-86
-87
-88
-89</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 82</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_aws_credentials'>aws_credentials</span>
-  <span class='ivar'>@aws_credentials</span> <span class='op'>||=</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_aws_access_key_id'>aws_access_key_id</span> <span class='kw'>and</span> <span class='id identifier rubyid_aws_secret_access_key'>aws_secret_access_key</span>
-      <span class='const'>Aws</span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_aws_access_key_id'>aws_access_key_id</span><span class='comma'>,</span> <span class='id identifier rubyid_aws_secret_access_key'>aws_secret_access_key</span><span class='rparen'>)</span>
-    <span class='kw'>else</span>
-      <span class='const'>Aws</span><span class='op'>::</span><span class='const'>SharedCredentials</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>profile_name:</span> <span class='id identifier rubyid_aws_profile'>aws_profile</span><span class='comma'>,</span> <span class='label'>path:</span> <span class='id identifier rubyid_aws_credentials_file'>aws_credentials_file</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="config-class_method">
   
     + (<tt>Object</tt>) <strong>config</strong> 
@@ -1047,19 +974,19 @@
       <pre class="lines">
 
 
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116</pre>
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span>
   <span class='kw'>return</span> <span class='ivar'>@config</span> <span class='kw'>if</span> <span class='ivar'>@config</span>
@@ -1119,20 +1046,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>private</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-91
-92
-93
-94
-95</pre>
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_optional_array_options'>optional_array_options</span>
   <span class='ivar'>@optional_array_options</span> <span class='op'>||=</span> <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_optional_array_tags'>optional_array_tags</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_tag'>tag</span><span class='op'>|</span>
@@ -1159,12 +1097,12 @@
       <pre class="lines">
 
 
-103
-104
-105</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_optional_options'>optional_options</span>
   <span class='ivar'>@optional_options</span> <span class='op'>||=</span> <span class='id identifier rubyid_optional_array_options'>optional_array_options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_optional_string_options'>optional_string_options</span><span class='rparen'>)</span>
@@ -1189,14 +1127,14 @@
       <pre class="lines">
 
 
-97
-98
-99
-100
-101</pre>
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/config.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_optional_string_options'>optional_string_options</span>
   <span class='ivar'>@optional_string_options</span> <span class='op'>||=</span> <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_optional_string_tags'>optional_string_tags</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_tag'>tag</span><span class='op'>|</span>
@@ -1243,7 +1181,7 @@
 </div>
 
     <div id="footer">
-  Generated on Fri Nov 18 23:47:48 2016 by
+  Generated on Tue Nov 22 01:35:20 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>

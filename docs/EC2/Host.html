@@ -99,7 +99,7 @@
   
     <dt class="r1 last">Defined in:</dt>
     <dd class="r1 last">lib/ec2/host.rb<span class="defines">,<br />
-  lib/ec2/host/cli.rb,<br /> lib/ec2/host/config.rb,<br /> lib/ec2/host/hash_util.rb,<br /> lib/ec2/host/host_data.rb,<br /> lib/ec2/host/role_data.rb,<br /> lib/ec2/host/string_util.rb,<br /> lib/ec2/host/client_util.rb</span>
+  lib/ec2/host/cli.rb,<br /> lib/ec2/host/config.rb,<br /> lib/ec2/host/hash_util.rb,<br /> lib/ec2/host/host_data.rb,<br /> lib/ec2/host/role_data.rb,<br /> lib/ec2/host/ec2_client.rb,<br /> lib/ec2/host/string_util.rb</span>
 </dd>
   
 </dl>
@@ -159,7 +159,7 @@ EC2::Host.me.hostname # =&gt; &#39;test&#39;</code></pre>
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Host/CLI.html" title="EC2::Host::CLI (class)">CLI</a></span>, <span class='object_link'><a href="Host/ClientUtil.html" title="EC2::Host::ClientUtil (class)">ClientUtil</a></span>, <span class='object_link'><a href="Host/Config.html" title="EC2::Host::Config (class)">Config</a></span>, <span class='object_link'><a href="Host/HostData.html" title="EC2::Host::HostData (class)">HostData</a></span>, <span class='object_link'><a href="Host/RoleData.html" title="EC2::Host::RoleData (class)">RoleData</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Host/CLI.html" title="EC2::Host::CLI (class)">CLI</a></span>, <span class='object_link'><a href="Host/Config.html" title="EC2::Host::Config (class)">Config</a></span>, <span class='object_link'><a href="Host/EC2Client.html" title="EC2::Host::EC2Client (class)">EC2Client</a></span>, <span class='object_link'><a href="Host/HostData.html" title="EC2::Host::HostData (class)">HostData</a></span>, <span class='object_link'><a href="Host/RoleData.html" title="EC2::Host::RoleData (class)">RoleData</a></span>
     
   
 </p>
@@ -268,6 +268,28 @@ EC2::Host.me.hostname # =&gt; &#39;test&#39;</code></pre>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#ec2_client-class_method" title="ec2_client (class method)">+ (Object) <strong>ec2_client</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#me-class_method" title="me (class method)">+ (Host::Data) <strong>me</strong> </a>
     
 
@@ -302,6 +324,28 @@ EC2::Host.me.hostname # =&gt; &#39;test&#39;</code></pre>
   <span class="summary_signature">
     
       <a href="#each-instance_method" title="#each (instance method)">- (Object) <strong>each</strong> {|data| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ec2_client-instance_method" title="#ec2_client (instance method)">- (Object) <strong>ec2_client</strong> </a>
     
 
     
@@ -431,14 +475,6 @@ options: {a: &#39;b&#39;}</code></pre>
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
-81
 82
 83
 84
@@ -447,10 +483,18 @@ options: {a: &#39;b&#39;}</code></pre>
 87
 88
 89
-90</pre>
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_conditions'>conditions</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_conditions'>conditions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_conditions'>conditions</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -507,12 +551,12 @@ options: {a: &#39;b&#39;}</code></pre>
       <pre class="lines">
 
 
-56
-57
-58</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_conditions'>conditions</span>
   <span class='ivar'>@conditions</span>
@@ -550,12 +594,12 @@ options: {a: &#39;b&#39;}</code></pre>
       <pre class="lines">
 
 
-56
-57
-58</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_options'>options</span>
   <span class='ivar'>@options</span>
@@ -607,6 +651,36 @@ options: {a: &#39;b&#39;}</code></pre>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ec2_client-class_method">
+  
+    + (<tt>Object</tt>) <strong>ec2_client</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ec2_client'>ec2_client</span>
+  <span class='ivar'>@ec2_client</span> <span class='op'>||=</span> <span class='const'>EC2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -728,21 +802,51 @@ options: {a: &#39;b&#39;}</code></pre>
       <pre class="lines">
 
 
-93
-94
-95
-96
-97
-98</pre>
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@conditions</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_condition'>condition</span><span class='op'>|</span>
-    <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='const'>ClientUtil</span><span class='period'>.</span><span class='id identifier rubyid_instances'>instances</span><span class='lparen'>(</span><span class='id identifier rubyid_condition'>condition</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_condition'>condition</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_ec2_client'>ec2_client</span><span class='period'>.</span><span class='id identifier rubyid_instances'>instances</span><span class='lparen'>(</span><span class='id identifier rubyid_condition'>condition</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_condition'>condition</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='kw'>return</span> <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ec2_client-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ec2_client</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ec2_client'>ec2_client</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_ec2_client'>ec2_client</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -754,7 +858,7 @@ options: {a: &#39;b&#39;}</code></pre>
 </div>
 
     <div id="footer">
-  Generated on Fri Nov 18 23:47:47 2016 by
+  Generated on Tue Nov 22 01:35:20 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>

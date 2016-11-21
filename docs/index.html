@@ -71,6 +71,17 @@
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_ec2'>ec2</span><span class='op'>-</span><span class='id identifier rubyid_host'>host</span>
 </code></pre>
 
+<h2 id="label-How+it+works">How it works</h2>
+
+<p>This gems uses <a
+href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">tagging
+of EC2 resources</a>. You can configure, but basically use
+<code>Name</code> tag for hostname (this is default of EC2) and
+<code>Roles</code> tag for roles.</p>
+
+<p>You can manage roles of a host, and search hosts having a specified role
+using thease tags with this gem.</p>
+
 <h2 id="label-Configuration">Configuration</h2>
 
 <p>You can write a configuration file located at
@@ -134,7 +145,7 @@ array. Default is <code>,</code></p>
 <code>debug</code>, <code>error</code>. The default is <code>info</code>.</p>
 </li></ul>
 
-<p>See <a href="./sample.conf">sample.conf</a></p>
+<p>See <a href="./example/example.conf">example.conf</a></p>
 
 <h2 id="label-Tag+Example">Tag Example</h2>
 <ul><li>
@@ -233,7 +244,7 @@ Usage: ec2-host [options]
 <h3 id="label-Library+Reference">Library Reference</h3>
 
 <p>See <a
-href="http://sonots.github.io/ec2-host/doc/frames.html">sonots.github.io/ec2-host/doc/frames.html</a>.</p>
+href="http://sonots.github.io/ec2-host/frames.html">sonots.github.io/ec2-host/frames.html</a>.</p>
 
 <h2 id="label-ChangeLog">ChangeLog</h2>
 
@@ -267,9 +278,9 @@ href="http://sonots.github.io/ec2-host/doc/frames.html">sonots.github.io/ec2-hos
 
 <h3 id="label-How+to+Update+doc">How to Update doc</h3>
 <ol><li>
-<p>Run <code>./doc.sh</code></p>
+<p>Run <code>bundle exec yard</code></p>
 </li><li>
-<p>git commit &amp;&amp; git push (to gh-pages branch)</p>
+<p>git commit &amp;&amp; git push</p>
 </li></ol>
 
 <h3 id="label-Licenses">Licenses</h3>
@@ -278,7 +289,7 @@ href="http://sonots.github.io/ec2-host/doc/frames.html">sonots.github.io/ec2-hos
 </div></div>
 
     <div id="footer">
-  Generated on Fri Nov 18 23:47:46 2016 by
+  Generated on Tue Nov 22 01:35:20 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>
