@@ -26,7 +26,7 @@ class EC2
       def roles
         return @roles if @roles
         roles = find_array_tag(Config.roles_tag)
-        @roles = roles.map {|role| EC2::Host::RoleData.initialize(role) }
+        @roles = roles.map {|role| EC2::Host::RoleData.build(role) }
       end
 
       def region
