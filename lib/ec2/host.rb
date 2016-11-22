@@ -109,7 +109,7 @@ class EC2
 
     def search(instances, condition)
       instances.each do |i|
-        d = EC2::Host::HostData.initialize(i)
+        d = EC2::Host::HostData.new(i)
         next unless d.match?(condition)
         yield d
       end
