@@ -10,7 +10,7 @@ class EC2
           :aws_profile,
           :aws_access_key_id,
           :aws_secret_access_key,
-          :aws_credentials_file,
+          :aws_credential_file,
           :log_level,
           :hostname_tag,
           :roles_tag,
@@ -30,25 +30,30 @@ class EC2
 
       def self.aws_region
         @aws_region ||=
-          ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) ||
-          ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION')
+          ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) || # ref. old aws cli
+          ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION') # ref. aws cli and terraform
       end
 
       def self.aws_profile
-        @aws_profile ||= ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'default')
+        @aws_profile ||=
+          ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'nil') || # ref. old aws cli
+          ENV['AWS_DEFAULT_PROFILE'] || config.fetch('AWS_DEFAULT_PROFILE', 'default') # ref. aws cli and terraform
       end
 
       def self.aws_access_key_id
+        # ref. aws cli and terraform
         @aws_access_key_id ||= ENV['AWS_ACCESS_KEY_ID'] || config.fetch('AWS_ACCESS_KEY_ID', nil)
       end
 
       def self.aws_secret_access_key
+        # ref. aws cli and terraform
         @aws_secret_access_key ||= ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY', nil)
       end
 
-      # this is not an official aws sdk environment variable
-      def self.aws_credentials_file
-        @aws_credentials_file ||= ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil)
+      def self.aws_credential_file
+        @aws_credential_file ||=
+          ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) ||
+          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) # ref. aws cli (supported lately)
       end
 
       def self.log_level

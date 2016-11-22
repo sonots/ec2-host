@@ -21,11 +21,11 @@ You can write a configuration file located at `/etc/sysconfig/ec2-host` (You can
 
 AWS SDK (CLI) parameters:
 
-* **AWS_DEFAULT_REGION**; AWS SDK (CLI) region such as `ap-northeast-1`, `us-east-1`. 
 * **AWS_ACCESS_KEY_ID**: AWS SDK (CLI) crendentials. Default loads a credentials file
 * **AWS_SECRET_ACCESS_KEY**: AWS SDK (CLI) credentials. Default load a credentials file
-* **AWS_PROFILE**: The profile key of the AWS SDK (CLI) credentails file. Default is `default`
-* **AWS_CREDENTIALS_FILE**: Path of the AWS SDK (CLI) credentails file. Default is `$HOME/.aws/credentials`. See [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files) for details. 
+* **AWS_DEFAULT_REGION** (**AWS_DEFUALT**); AWS SDK (CLI) region such as `ap-northeast-1`, `us-east-1`. 
+* **AWS_DEFAULT_PROFILE** (**AWS_PROFILE**): The profile key of the AWS SDK (CLI) credentails file. Default is `default`
+* **AWS_CREDENTIAL_FILE** (**AWS_CREDENTIALS_FILE**): Path of the AWS SDK (CLI) credentails file. Default is `$HOME/.aws/credentials`. See [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files) for details. 
 
 ec2-host parameters:
 

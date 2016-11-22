@@ -38,7 +38,7 @@ class EC2
         if Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
         else
-          Aws::SharedCredentials.new(profile_name: Config.aws_profile, path: Config.aws_credentials_file)
+          Aws::SharedCredentials.new(profile_name: Config.aws_profile, path: Config.aws_credential_file)
         end
       end
 
