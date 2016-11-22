@@ -29,7 +29,9 @@ class EC2
       end
 
       def self.aws_region
-        @aws_region ||= ENV['AWS_REGION'] || config.fetch('AWS_REGION')
+        @aws_region ||=
+          ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) ||
+          ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION')
       end
 
       def self.aws_profile

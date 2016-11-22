@@ -21,7 +21,7 @@ You can write a configuration file located at `/etc/sysconfig/ec2-host` (You can
 
 AWS SDK (CLI) parameters:
 
-* **AWS_REGION**; AWS SDK (CLI) region such as `ap-northeast-1`, `us-east-1`. 
+* **AWS_DEFAULT_REGION**; AWS SDK (CLI) region such as `ap-northeast-1`, `us-east-1`. 
 * **AWS_ACCESS_KEY_ID**: AWS SDK (CLI) crendentials. Default loads a credentials file
 * **AWS_SECRET_ACCESS_KEY**: AWS SDK (CLI) credentials. Default load a credentials file
 * **AWS_PROFILE**: The profile key of the AWS SDK (CLI) credentails file. Default is `default`
@@ -163,7 +163,34 @@ See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ### How to Run test
 
-See [spec/README.md](spec/README.md)
+NOTE: Currently, mock is not supported yet. So, you have to create your own AWS account, and instances.
+
+Configure .env file as
+
+```
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=
+EC2_HOST_CONFIG_FILE=.env
+OPTIONAL_ARRAY_TAGS=Tags
+OPTIONAL_STRING_TAGS=Service,Status
+```
+
+Install terraform and run to create instances for tests
+
+```
+$ brew install terraform
+$ env $(cat .env) terraform plan
+$ env ($cat .env) terraform apply
+```
+
+Run test
+
+```
+$ bundle exec rspec
+```
+
+After working, destory instances by commenting out `terraform.tf` and apply.
 
 ### How to Release Gem
 

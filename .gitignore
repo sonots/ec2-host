@@ -15,3 +15,5 @@ vendor
 *.swp
 pkg/
 .env
+*tfstate
+*tfstate.backup
