@@ -205,8 +205,8 @@ class EC2
       def info
         if self.class.display_short_info?
           info = "#{hostname}:#{status}"
-          info << "(#{roles.join(' ')})" unless roles.empty?
-          info << "[#{tags.join(' ')}]" unless tags.empty?
+          info << "(#{roles.join(',')})" unless roles.empty?
+          info << "[#{tags.join(',')}]" unless tags.empty?
           info << "{#{service}}" unless service.empty?
           info
         else
