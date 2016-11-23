@@ -91,19 +91,21 @@ variables:</p>
 
 <p>AWS SDK (CLI) parameters:</p>
 <ul><li>
-<p><strong>AWS_REGION</strong>; AWS SDK (CLI) region such as
-<code>ap-northeast-1</code>, <code>us-east-1</code>.</p>
-</li><li>
 <p><strong>AWS_ACCESS_KEY_ID</strong>: AWS SDK (CLI) crendentials. Default
 loads a credentials file</p>
 </li><li>
 <p><strong>AWS_SECRET_ACCESS_KEY</strong>: AWS SDK (CLI) credentials. Default
 load a credentials file</p>
 </li><li>
-<p><strong>AWS_PROFILE</strong>: The profile key of the AWS SDK (CLI)
-credentails file. Default is <code>default</code></p>
+<p><strong>AWS_DEFAULT_REGION</strong> (<strong>AWS_DEFUALT</strong>); AWS SDK
+(CLI) region such as <code>ap-northeast-1</code>, <code>us-east-1</code>.</p>
 </li><li>
-<p><strong>AWS_CREDENTIALS_FILE</strong>: Path of the AWS SDK (CLI)
+<p><strong>AWS_DEFAULT_PROFILE</strong> (<strong>AWS_PROFILE</strong>): The
+profile key of the AWS SDK (CLI) credentails file. Default is
+<code>default</code></p>
+</li><li>
+<p><strong>AWS_CREDENTIAL_FILE</strong>
+(<strong>AWS_CREDENTIALS_FILE</strong>): Path of the AWS SDK (CLI)
 credentails file. Default is <code>$HOME/.aws/credentials</code>. See <a
 href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files">Configuring
 the AWS Command Line Interface</a> for details.</p>
@@ -263,7 +265,30 @@ href="http://sonots.github.io/ec2-host/frames.html">sonots.github.io/ec2-host/fr
 
 <h3 id="label-How+to+Run+test">How to Run test</h3>
 
-<p>See <a href="spec/README.md">spec/README.md</a></p>
+<p>NOTE: Currently, mock is not supported yet. So, you have to create your own
+AWS account, and instances.</p>
+
+<p>Configure .env file as</p>
+
+<pre class="code ruby"><code class="ruby">AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=
+EC2_HOST_CONFIG_FILE=.env
+OPTIONAL_ARRAY_TAGS=Tags
+OPTIONAL_STRING_TAGS=Service,Status</code></pre>
+
+<p>Install terraform and run to create instances for tests</p>
+
+<pre class="code ruby"><code class="ruby">$ brew install terraform
+$ env $(cat .env) terraform plan
+$ env ($cat .env) terraform apply</code></pre>
+
+<p>Run test</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec rspec</code></pre>
+
+<p>After working, destory instances by commenting out
+<code>terraform.tf</code> and apply.</p>
 
 <h3 id="label-How+to+Release+Gem">How to Release Gem</h3>
 <ol><li>
@@ -289,7 +314,7 @@ href="http://sonots.github.io/ec2-host/frames.html">sonots.github.io/ec2-host/fr
 </div></div>
 
     <div id="footer">
-  Generated on Tue Nov 22 01:35:20 2016 by
+  Generated on Wed Nov 23 20:12:46 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>

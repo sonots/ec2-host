@@ -634,7 +634,29 @@ options: {a: &#39;b&#39;}</code></pre>
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>see EC2::Host::Config for configurable parameters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -742,7 +764,7 @@ options: {a: &#39;b&#39;}</code></pre>
       <pre class="code"><span class="info file"># File 'lib/ec2/host.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_me'>me</span>
-  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>instance_id:</span> <span class='const'>ClientUtil</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>instance_id:</span> <span class='id identifier rubyid_ec2_client'>ec2_client</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span>
     <span class='kw'>return</span> <span class='id identifier rubyid_d'>d</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Not Found</span><span class='tstring_end'>&#39;</span></span>
@@ -858,7 +880,7 @@ options: {a: &#39;b&#39;}</code></pre>
 </div>
 
     <div id="footer">
-  Generated on Tue Nov 22 01:35:20 2016 by
+  Generated on Wed Nov 23 20:12:47 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>

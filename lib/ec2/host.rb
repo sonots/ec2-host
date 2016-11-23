@@ -48,7 +48,7 @@ class EC2
 
     # Configure EC2::Host
     #
-    # @params [Hash] params see EC2::Host::Config for configurable parameters
+    # @param [Hash] params see EC2::Host::Config for configurable parameters
     def self.configure(params = {})
       Config.configure(params)
     end
