@@ -278,6 +278,28 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#instance_type-instance_method" title="#instance_type (instance method)">- (Object) <strong>instance_type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#ip-instance_method" title="#ip (instance method)">- (Object) <strong>ip</strong> </a>
     
 
@@ -836,20 +858,20 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-147
-148
-149
-150
-151
 152
 153
 154
 155
 156
-157</pre>
+157
+158
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info'>info</span>
   <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_display_short_info?'>display_short_info?</span>
@@ -882,12 +904,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-159
-160
-161</pre>
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_sprintf'>sprintf</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;Aws::Host::HostData %s&gt;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span>
@@ -928,6 +950,36 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="instance_type-instance_method">
+  
+    - (<tt>Object</tt>) <strong>instance_type</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_type'>instance_type</span>
+  <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_type'>instance_type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="ip-instance_method">
   
     - (<tt>Object</tt>) <strong>ip</strong> 
@@ -953,12 +1005,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-75
-76
-77</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ip'>ip</span>
   <span class='id identifier rubyid_private_ip_address'>private_ip_address</span>
@@ -983,12 +1035,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-62
-63
-64</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_launch_time'>launch_time</span>
   <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_launch_time'>launch_time</span>
@@ -1057,15 +1109,15 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-116
-117
-118
-119
 120
-121</pre>
+121
+122
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_condition'>condition</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_condition'>condition</span><span class='lbracket'>[</span><span class='symbol'>:state</span><span class='rbracket'>]</span> <span class='kw'>and</span> <span class='lparen'>(</span><span class='id identifier rubyid_terminated?'>terminated?</span> <span class='kw'>or</span> <span class='id identifier rubyid_shutting_down?'>shutting_down?</span><span class='rparen'>)</span>
@@ -1093,12 +1145,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-70
-71
-72</pre>
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_monitoring'>monitoring</span>
   <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_monitoring'>monitoring</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span>
@@ -1145,12 +1197,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-109
-110
-111</pre>
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pending?'>pending?</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pending</span><span class='tstring_end'>&quot;</span></span>
@@ -1175,12 +1227,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-54
-55
-56</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_ip_address'>private_ip_address</span>
   <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_private_ip_address'>private_ip_address</span>
@@ -1205,12 +1257,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-58
-59
-60</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_ip_address'>public_ip_address</span>
   <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_public_ip_address'>public_ip_address</span>
@@ -1321,12 +1373,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-105
-106
-107</pre>
+109
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_running?'>running?</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>running</span><span class='tstring_end'>&quot;</span></span>
@@ -1373,12 +1425,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-93
-94
-95</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shutting_down?'>shutting_down?</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>shutting-down</span><span class='tstring_end'>&quot;</span></span>
@@ -1414,12 +1466,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-80
-81
-82</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_date'>start_date</span>
   <span class='id identifier rubyid_launch_time'>launch_time</span>
@@ -1444,12 +1496,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-66
-67
-68</pre>
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
   <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
@@ -1474,12 +1526,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-101
-102
-103</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped'>stopped</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stopped</span><span class='tstring_end'>&quot;</span></span>
@@ -1526,12 +1578,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-97
-98
-99</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopping?'>stopping?</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stopping</span><span class='tstring_end'>&quot;</span></span>
@@ -1578,12 +1630,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-89
-90
-91</pre>
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_terminated?'>terminated?</span>
   <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>terminated</span><span class='tstring_end'>&quot;</span></span>
@@ -1608,10 +1660,6 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-123
-124
-125
-126
 127
 128
 129
@@ -1630,16 +1678,20 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
 142
 143
 144
-145</pre>
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_hash'>to_hash</span>
   <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hostname</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_hostname'>hostname</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_roles'>roles</span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>region</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
   <span class='rbrace'>}</span>
   <span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_optional_string_tags'>optional_string_tags</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tag'>tag</span><span class='op'>|</span>
     <span class='id identifier rubyid_field'>field</span> <span class='op'>=</span> <span class='const'>StringUtil</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='rparen'>)</span>
@@ -1650,7 +1702,9 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
     <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='id identifier rubyid_field'>field</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>region</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>instance_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>instance_type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_instance_type'>instance_type</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>private_ip_address</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_private_ip_address'>private_ip_address</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>public_ip_address</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_public_ip_address'>public_ip_address</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>launch_time</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_launch_time'>launch_time</span><span class='comma'>,</span>
@@ -1689,12 +1743,12 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
       <pre class="lines">
 
 
-85
-86
-87</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/host_data.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_usages'>usages</span>
   <span class='id identifier rubyid_roles'>roles</span>
@@ -1709,7 +1763,7 @@ href="'AWS_REGION'">ENV</a>, :instance, # Aws::EC2::Types::Instance itself</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Nov 23 20:12:47 2016 by
+  Generated on Thu Nov 24 10:25:36 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>
