@@ -51,6 +51,10 @@ class EC2
         instance.instance_id
       end
 
+      def instance_type
+        instance.instance_type
+      end
+
       def private_ip_address
         instance.private_ip_address
       end
@@ -124,7 +128,6 @@ class EC2
         params = {
           "hostname" => hostname,
           "roles" => roles,
-          "region" => region,
         }
         Config.optional_string_tags.each do |tag|
           field = StringUtil.underscore(tag)
@@ -135,7 +138,9 @@ class EC2
           params[field] = send(field)
         end
         params.merge!(
+          "region" => region,
           "instance_id" => instance_id,
+          "instance_type" => instance_type,
           "private_ip_address" => private_ip_address,
           "public_ip_address" => public_ip_address,
           "launch_time" => launch_time,
