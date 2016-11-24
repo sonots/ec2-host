@@ -1,3 +1,11 @@
+# 0.4.0 (2016/11/24)
+
+Enhancements:
+
+* Refactoring
+* Add instance_type to to_hash (or -j option)
+* Support new standard environment variables of AWS CLI such as AWS_DEFAULT_REGION, AWS_DEFAULT_PROFILE, AWS_CREDENTIAL_FILE.
+
 # 0.3.1 (2016/04/21)
 
 Enhancements:
