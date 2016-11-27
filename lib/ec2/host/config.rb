@@ -1,3 +1,4 @@
+require 'inifile'
 require 'dotenv'
 Dotenv.load
 
@@ -31,12 +32,13 @@ class EC2
       def self.aws_region
         @aws_region ||=
           ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) || # ref. old aws cli
-          ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION') # ref. aws cli and terraform
+          ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION', nil) || # ref. aws cli and terraform
+          aws_config['region'] || raise('AWS_REGION nor AWS_DEFAULT_REGION is not set')
       end
 
       def self.aws_profile
         @aws_profile ||=
-          ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', 'nil') || # ref. old aws cli
+          ENV['AWS_PROFILE'] || config.fetch('AWS_PROFILE', nil) || # ref. old aws cli
           ENV['AWS_DEFAULT_PROFILE'] || config.fetch('AWS_DEFAULT_PROFILE', 'default') # ref. aws cli and terraform
       end
 
@@ -53,7 +55,25 @@ class EC2
       def self.aws_credential_file
         @aws_credential_file ||=
           ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) ||
-          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) # ref. aws cli (supported lately)
+          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) || # ref. aws cli (supported lately)
+          File.expand_path('~/.aws/credentials')
+      end
+
+      def self.aws_config_file
+        @aws_config_file ||= ENV['AWS_CONFIG_FILE'] || config.fetch('AWS_CONFIG_FILE', nil) || File.expand_path('~/.aws/config')
+      end
+
+      def self.aws_config
+        return @aws_config if @aws_config
+        if File.readable?(aws_config_file)
+          ini = IniFile.load(aws_config_file).to_h
+          if aws_profile == 'default'
+            @aws_config = ini['default']
+          else
+            @aws_config = ini["profile #{aws_profile}"]
+          end
+        end
+        @aws_config ||= {}
       end
 
       def self.log_level
