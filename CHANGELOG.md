@@ -1,3 +1,10 @@
+# 0.4.1 (2016/11/24)
+
+Enhancements:
+
+* Get AWS_REGION from ~/.aws/config as default
+* Fix default of AWS_PROFILE was set to 'nil' rather than nil
+
 # 0.4.0 (2016/11/24)
 
 Enhancements:

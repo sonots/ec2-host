@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "ec2-host"
-  gem.version       = '0.4.0'
+  gem.version       = '0.4.1'
   gem.author        = ['Naotoshi Seo']
   gem.email         = ['sonots@gmail.com']
   gem.homepage      = 'https://github.com/sonots/ec2-host'
