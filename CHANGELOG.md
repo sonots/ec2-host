@@ -1,3 +1,9 @@
+# 0.4.2 (2016/11/28)
+
+Enhancements:
+
+* Support /etc/default/ec2-host as default
+
 # 0.4.1 (2016/11/24)
 
 Enhancements:

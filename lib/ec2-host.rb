@@ -1,3 +1,4 @@
+require_relative 'ec2/host/version'
 require_relative 'ec2/host/string_util'
 require_relative 'ec2/host/hash_util'
 require_relative 'ec2/host/config'

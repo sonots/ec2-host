@@ -1,6 +1,8 @@
+require_relative 'lib/ec2/host/version'
+
 Gem::Specification.new do |gem|
   gem.name          = "ec2-host"
-  gem.version       = '0.4.1'
+  gem.version       = EC2::Host::VERSION
   gem.author        = ['Naotoshi Seo']
   gem.email         = ['sonots@gmail.com']
   gem.homepage      = 'https://github.com/sonots/ec2-host'
