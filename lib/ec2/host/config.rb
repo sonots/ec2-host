@@ -26,7 +26,7 @@ class EC2
       end
 
       def self.config_file
-        @config_file ||= ENV.fetch('EC2_HOST_CONFIG_FILE', '/etc/sysconfig/ec2-host')
+        @config_file ||= ENV.fetch('EC2_HOST_CONFIG_FILE', File.exist?('/etc/sysconfig/ec2-host') ? '/etc/sysconfig/ec2-host' : '/etc/default/ec2-host')
       end
 
       def self.aws_region

@@ -17,7 +17,7 @@ You can manage roles of a host, and search hosts having a specified role using t
 
 ## Configuration
 
-You can write a configuration file located at `/etc/sysconfig/ec2-host` (You can configure this path by `EC2_HOST_CONFIG_FILE` environment variable), or as environment variables:
+You can write a configuration file located at `/etc/sysconfig/ec2-host` or `/etc/default/ec2-host` (You can configure this path by `EC2_HOST_CONFIG_FILE` environment variable), or as environment variables:
 
 AWS SDK (CLI) parameters:
 
