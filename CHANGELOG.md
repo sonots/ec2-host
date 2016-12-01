@@ -1,3 +1,9 @@
+# 0.5.0 (2016/12/01)
+
+Enhancements:
+
+* Support role levels more than 3 by ROLE_MAX_DEPTH configuration
+
 # 0.4.2 (2016/11/28)
 
 Enhancements:
