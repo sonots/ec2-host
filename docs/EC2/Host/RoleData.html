@@ -114,98 +114,6 @@
 
 
 
-  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#role1-instance_method" title="#role1 (instance method)">- (Object) <strong>role1</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute role1.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#role2-instance_method" title="#role2 (instance method)">- (Object) <strong>role2</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute role2.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#role3-instance_method" title="#role3 (instance method)">- (Object) <strong>role3</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute role3.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -234,7 +142,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a role data with role delimiter by Config.role_tag_delimiter.</p>
+</div></span>
   
 </li>
 
@@ -275,7 +185,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (RoleData) <strong>initialize</strong>(role1, role2 = nil, role3 = nil) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (RoleData) <strong>initialize</strong>(*role_parts) </a>
     
 
     
@@ -292,7 +202,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of RoleData.</p>
+<p>Initialize role data with role parts.</p>
 </div></span>
   
 </li>
@@ -323,7 +233,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#match%3F-instance_method" title="#match? (instance method)">- (Boolean) <strong>match?</strong>(role1, role2 = nil, role3 = nil) </a>
+      <a href="#match%3F-instance_method" title="#match? (instance method)">- (Boolean) <strong>match?</strong>(*role_parts) </a>
     
 
     
@@ -337,7 +247,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether given role parts matches with this role data object.</p>
+</div></span>
   
 </li>
 
@@ -401,7 +313,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="EC2::Host::RoleData (class)">RoleData</a></span></tt>) <strong>initialize</strong>(role1, role2 = nil, role3 = nil) 
+    - (<tt><span class='object_link'><a href="" title="EC2::Host::RoleData (class)">RoleData</a></span></tt>) <strong>initialize</strong>(*role_parts) 
   
 
   
@@ -410,13 +322,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new instance of RoleData</p>
+<p>Initialize role data with role parts</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>role_parts</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>such as [&#39;admin&#39;, &#39;jenkins&#39;, &#39;slave&#39;]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -424,19 +359,15 @@
       <pre class="lines">
 
 
-7
-8
-9
 10
-11</pre>
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 10</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='ivar'>@role1</span> <span class='op'>=</span> <span class='id identifier rubyid_role1'>role1</span>
-  <span class='ivar'>@role2</span> <span class='op'>=</span> <span class='id identifier rubyid_role2'>role2</span>
-  <span class='ivar'>@role3</span> <span class='op'>=</span> <span class='id identifier rubyid_role3'>role3</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='rparen'>)</span>
+  <span class='ivar'>@role_parts</span> <span class='op'>=</span> <span class='id identifier rubyid_role_parts'>role_parts</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -444,140 +375,6 @@
 </div>
   
 </div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="role1-instance_method">
-  
-    - (<tt>Object</tt>) <strong>role1</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute role1</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-5
-6
-7</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 5</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_role1'>role1</span>
-  <span class='ivar'>@role1</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="role2-instance_method">
-  
-    - (<tt>Object</tt>) <strong>role2</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute role2</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-5
-6
-7</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 5</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_role2'>role2</span>
-  <span class='ivar'>@role2</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="role3-instance_method">
-  
-    - (<tt>Object</tt>) <strong>role3</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute role3</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-5
-6
-7</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 5</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_role3'>role3</span>
-  <span class='ivar'>@role3</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 
   <div id="class_method_details" class="method_details_list">
@@ -593,23 +390,57 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a role data with role delimiter by Config.role_tag_delimiter</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin:jenkins:slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>role</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>such as “admin:jenkins:slave”</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-13
-14
-15
-16</pre>
+19
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span> <span class='op'>=</span> <span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_tag_delimiter'>role_tag_delimiter</span><span class='comma'>,</span> <span class='int'>3</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_role_parts'>role_parts</span> <span class='op'>=</span> <span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_tag_delimiter'>role_tag_delimiter</span><span class='comma'>,</span> <span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_max_depth'>role_max_depth</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -636,8 +467,8 @@
     
 <p>Equality</p>
 
-<pre class="code ruby"><code class="ruby"><span class='const'>Role</span><span class='op'>::</span><span class='const'>Data</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>==</span> <span class='const'>Role</span><span class='op'>::</span><span class='const'>Data</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; true
-</span><span class='const'>Role</span><span class='op'>::</span><span class='const'>Data</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin:jenkins</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; true
+<pre class="code ruby"><code class="ruby"><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>==</span> <span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; true
+</span><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin:jenkins</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; true
 </span></code></pre>
 
 
@@ -667,19 +498,19 @@
       <pre class="lines">
 
 
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57</pre>
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_other'>other</span>
@@ -711,12 +542,12 @@
       <pre class="lines">
 
 
-59
-60
-61</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>\&quot;</span><span class='tstring_end'>&quot;</span></span>
@@ -729,7 +560,7 @@
       <div class="method_details ">
   <h3 class="signature " id="match?-instance_method">
   
-    - (<tt>Boolean</tt>) <strong>match?</strong>(role1, role2 = nil, role3 = nil) 
+    - (<tt>Boolean</tt>) <strong>match?</strong>(*role_parts) 
   
 
   
@@ -738,11 +569,39 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Check whether given role parts matches with this role data object</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; true
+</span><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; true
+</span><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; true
+</span><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>slave</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jenkins</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>master</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; false
+</span></code></pre>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>role_parts</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>such as [“admin”, “jenkins”, “slave”]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -763,26 +622,20 @@
       <pre class="lines">
 
 
-32
-33
-34
-35
-36
-37
-38
-39
-40</pre>
+56
+57
+58
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 56</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_role3'>role3</span>
-    <span class='id identifier rubyid_role1'>role1</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role1'>role1</span> <span class='kw'>and</span> <span class='id identifier rubyid_role2'>role2</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role2'>role2</span> <span class='kw'>and</span> <span class='id identifier rubyid_role3'>role3</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role3'>role3</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_role2'>role2</span>
-    <span class='id identifier rubyid_role1'>role1</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role1'>role1</span> <span class='kw'>and</span> <span class='id identifier rubyid_role2'>role2</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role2'>role2</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_role1'>role1</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_role1'>role1</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='rparen'>)</span>
+  <span class='lparen'>(</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_max_depth'>role_max_depth</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_downto'>downto</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_role_parts'>role_parts</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span>
+    <span class='kw'>return</span> <span class='ivar'>@role_parts</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_role_parts'>role_parts</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -838,15 +691,15 @@
       <pre class="lines">
 
 
-19
-20
-21</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_role'>role</span>
-  <span class='ivar'>@role</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_tag_delimiter'>role_tag_delimiter</span><span class='rparen'>)</span>
+  <span class='ivar'>@role</span> <span class='op'>||=</span> <span class='ivar'>@role_parts</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_role_tag_delimiter'>role_tag_delimiter</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -897,21 +750,29 @@
       <pre class="lines">
 
 
-25
-26
-27
-28
-29
-30</pre>
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/ec2/host/role_data.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_uppers'>uppers</span>
-  <span class='id identifier rubyid_uppers'>uppers</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='rparen'>)</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_uppers'>uppers</span> <span class='op'>&lt;&lt;</span> <span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_role2'>role2</span> <span class='kw'>and</span> <span class='op'>!</span><span class='id identifier rubyid_role2'>role2</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_uppers'>uppers</span> <span class='op'>&lt;&lt;</span> <span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_role1'>role1</span><span class='comma'>,</span> <span class='id identifier rubyid_role2'>role2</span><span class='comma'>,</span> <span class='id identifier rubyid_role3'>role3</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_role3'>role3</span> <span class='kw'>and</span> <span class='op'>!</span><span class='id identifier rubyid_role3'>role3</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_uppers'>uppers</span>
+  <span class='id identifier rubyid_role_parts'>role_parts</span> <span class='op'>=</span> <span class='ivar'>@role_parts</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='id identifier rubyid_upper_role_parts'>upper_role_parts</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_upper_role_parts'>upper_role_parts</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_role_parts'>role_parts</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_role_part'>role_part</span><span class='op'>|</span>
+    <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_role_part'>role_part</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>or</span> <span class='id identifier rubyid_role_part'>role_part</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_upper_role_parts'>upper_role_parts</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='lparen'>(</span><span class='id identifier rubyid_upper_role_parts'>upper_role_parts</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_role_part'>role_part</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_upper_role_parts'>upper_role_parts</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='op'>|</span> <span class='const'>RoleData</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_role_parts'>role_parts</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -923,7 +784,7 @@
 </div>
 
     <div id="footer">
-  Generated on Thu Nov 24 10:25:37 2016 by
+  Generated on Fri Dec  2 02:07:55 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>

@@ -2,50 +2,68 @@ class EC2
   class Host
     # Represents each role
     class RoleData
-      def initialize(*parts)
-        @parts = parts
+      # Initialize role data with role parts
+      #
+      #     RoleData.new('admin', 'jenkins', 'slave')
+      #
+      # @param [Array] role_parts such as ['admin', 'jenkins', 'slave']
+      def initialize(*role_parts)
+        @role_parts = role_parts
       end
 
+      # Create a role data with role delimiter by Config.role_tag_delimiter
+      #
+      #     RoleData.build('admin:jenkins:slave')
+      #
+      # @param [String] role such as "admin:jenkins:slave"
       def self.build(role)
-        parts = role.split(Config.role_tag_delimiter, Config.role_max_depth)
-        new(*parts)
+        role_parts = role.split(Config.role_tag_delimiter, Config.role_max_depth)
+        new(*role_parts)
       end
 
       # @return [String] something like "admin:jenkins:slave"
       def role
-        @role ||= @parts.compact.reject(&:empty?).join(Config.role_tag_delimiter)
+        @role ||= @role_parts.compact.reject(&:empty?).join(Config.role_tag_delimiter)
       end
       alias :to_s :role
 
       1.upto(Config.role_max_depth).each do |i|
         define_method("role#{i}") do
-          @parts[i-1]
+          @role_parts[i-1]
         end
       end
 
       # @return [Array] something like ["admin", "admin:jenkins", "admin:jenkins:slave"]
       def uppers
-        parts = @parts.dup
-        upper_parts = []
-        upper_parts << [parts.shift]
-        parts.each do |part|
-          break if part.nil? or part.empty?
-          upper_parts << [*(upper_parts.last), part]
+        role_parts = @role_parts.dup
+        upper_role_parts = []
+        upper_role_parts << [role_parts.shift]
+        role_parts.each do |role_part|
+          break if role_part.nil? or role_part.empty?
+          upper_role_parts << [*(upper_role_parts.last), role_part]
         end
-        upper_parts.map {|parts| RoleData.new(*parts) }
+        upper_role_parts.map {|role_parts| RoleData.new(*role_parts) }
       end
 
-      def match?(*parts)
+      # Check whether given role parts matches with this role data object
+      #
+      #     RoleData.new('admin', 'jenkins', 'slave').match?('admin') #=> true
+      #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins') #=> true
+      #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins', 'slave') #=> true
+      #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins', 'master') #=> false
+      #
+      # @param [Array] role_parts such as ["admin", "jenkins", "slave"]
+      def match?(*role_parts)
         (Config.role_max_depth-1).downto(0).each do |i|
-          next unless parts[i]
-          return @parts[0..i] == parts[0..i]
+          next unless role_parts[i]
+          return @role_parts[0..i] == role_parts[0..i]
         end
       end
 
       # Equality
       #
-      #     Role::Data.new('admin') == Role::Data.new('admin') #=> true
-      #     Role::Data.new('admin', 'jenkin') == "admin:jenkins" #=> true
+      #     RoleData.new('admin') == RoleData.new('admin') #=> true
+      #     RoleData.new('admin', 'jenkin') == "admin:jenkins" #=> true
       #
       # @param [Object] other
       def ==(other)

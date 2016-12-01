@@ -85,9 +85,9 @@ using thease tags with this gem.</p>
 <h2 id="label-Configuration">Configuration</h2>
 
 <p>You can write a configuration file located at
-<code>/etc/sysconfig/ec2-host</code> (You can configure this path by
-<code>EC2_HOST_CONFIG_FILE</code> environment variable), or as environment
-variables:</p>
+<code>/etc/sysconfig/ec2-host</code> or <code>/etc/default/ec2-host</code>
+(You can configure this path by <code>EC2_HOST_CONFIG_FILE</code>
+environment variable), or as environment variables:</p>
 
 <p>AWS SDK (CLI) parameters:</p>
 <ul><li>
@@ -98,7 +98,9 @@ loads a credentials file</p>
 load a credentials file</p>
 </li><li>
 <p><strong>AWS_DEFAULT_REGION</strong> (<strong>AWS_REGION</strong>); AWS SDK
-(CLI) region such as <code>ap-northeast-1</code>, <code>us-east-1</code>.</p>
+(CLI) region such as <code>ap-northeast-1</code>, <code>us-east-1</code>.
+Default obtains from <code>$HOME/.aws/config</code> with profile
+<code>AWS_DEFAULT_PROFILE</code>.</p>
 </li><li>
 <p><strong>AWS_DEFAULT_PROFILE</strong> (<strong>AWS_PROFILE</strong>): The
 profile key of the AWS SDK (CLI) credentails file. Default is
@@ -142,6 +144,9 @@ tags. Array tags allows multiple values delimited by
 </li><li>
 <p><strong>ARRAY_TAG_DELIMITER (optional)</strong>: A delimiter to express
 array. Default is <code>,</code></p>
+</li><li>
+<p><strong>ROLE_MAX_DEPTH (optional)</strong>: The maximum depth of levels of
+roles. Default is 3.</p>
 </li><li>
 <p><strong>LOG_LEVEL (optional)</strong>: Log level such as <code>info</code>,
 <code>debug</code>, <code>error</code>. The default is <code>info</code>.</p>
@@ -215,9 +220,9 @@ test</code></pre>
 Usage: ec2-host [options]
         --hostname one,two,three     name or private_dns_name
     -r, --role one,two,three         role
-        --r1, --role1 one,two,three  role1, the 1st part of role delimited by :
-        --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
-        --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
+        --r1, --role1 one,two,three  role1, 1th part of role delimited by :
+        --r2, --role2 one,two,three  role2, 2th part of role delimited by :
+        --r3, --role3 one,two,three  role3, 3th part of role delimited by :
         --instance-id one,two,three  instance_id
         --state one,two,three        filter with instance state (default: running)
         --monitoring one,two,three   filter with instance monitoring
@@ -314,7 +319,7 @@ $ env ($cat .env) terraform apply</code></pre>
 </div></div>
 
     <div id="footer">
-  Generated on Thu Nov 24 10:25:35 2016 by
+  Generated on Fri Dec  2 02:07:54 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.2).
 </div>
