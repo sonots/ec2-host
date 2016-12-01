@@ -44,16 +44,14 @@ class EC2
 
       def build_filters(condition)
         if role = (condition[:role] || condition[:usage]) and role.size == 1
-          [{name: "tag:#{Config.roles_tag}", values: ["*#{role.first}*"]}]
-        elsif role1 = (condition[:role1] || condition[:usage1]) and role1.size == 1
-          [{name: "tag:#{Config.roles_tag}", values: ["*#{role1.first}*"]}]
-        elsif role2 = (condition[:role2] || condition[:usage2]) and role2.size == 1
-          [{name: "tag:#{Config.roles_tag}", values: ["*#{role2.first}*"]}]
-        elsif role3 = (condition[:role3] || condition[:usage3]) and role3.size == 1
-          [{name: "tag:#{Config.roles_tag}", values: ["*#{role3.first}*"]}]
-        else
-          nil
+          return [{name: "tag:#{Config.roles_tag}", values: ["*#{role.first}*"]}]
         end
+        1.upto(Config.role_max_depth).each do |i|
+          if role = (condition["role#{i}".to_sym] || condition["usage#{i}".to_sym]) and role.size == 1
+            return [{name: "tag:#{Config.roles_tag}", values: ["*#{role.first}*"]}]
+          end
+        end
+        nil
       end
     end
   end

@@ -46,11 +46,12 @@ describe EC2::Host do
       expect(subject.keys).to eq([
         'hostname',
         'roles',
-        'region',
         'service',
         'status',
         'tags',
+        'region',
         'instance_id',
+        'instance_type',
         'private_ip_address',
         'public_ip_address',
         'launch_time',

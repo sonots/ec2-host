@@ -38,6 +38,7 @@ ec2-host parameters:
 * **OPTIONAL_STRING_TAGS (optional)**: You may add optional non-array tags. You can specify multiple tags like `Service,Status`. 
 * **OPTIONAL_ARRAY_TAGS (optional)**: You may add optional array tags. Array tags allows multiple values delimited by `ARRAY_TAG_DELIMITER` (default: `,`)
 * **ARRAY_TAG_DELIMITER (optional)**: A delimiter to express array. Default is `,`
+* **ROLE_MAX_DEPTH (optional)**: The maximum depth of levels of roles. Default is 3.
 * **LOG_LEVEL (optional)**: Log level such as `info`, `debug`, `error`. The default is `info`. 
 
 See [example.conf](./example/example.conf)
@@ -115,9 +116,9 @@ $ bin/ec2-host --help
 Usage: ec2-host [options]
         --hostname one,two,three     name or private_dns_name
     -r, --role one,two,three         role
-        --r1, --role1 one,two,three  role1, the 1st part of role delimited by :
-        --r2, --role2 one,two,three  role2, the 2st part of role delimited by :
-        --r3, --role3 one,two,three  role3, the 3st part of role delimited by :
+        --r1, --role1 one,two,three  role1, 1th part of role delimited by :
+        --r2, --role2 one,two,three  role2, 2th part of role delimited by :
+        --r3, --role3 one,two,three  role3, 3th part of role delimited by :
         --instance-id one,two,three  instance_id
         --state one,two,three        filter with instance state (default: running)
         --monitoring one,two,three   filter with instance monitoring
