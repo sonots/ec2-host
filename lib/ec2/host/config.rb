@@ -104,6 +104,10 @@ class EC2
         @array_tag_delimiter ||= ENV['ARRAY_TAG_DELIMITER'] || config.fetch('ARRAY_TAG_DELIMITER', ',')
       end
 
+      def self.role_max_depth
+        @role_max_depth ||= Integer(ENV['ROLE_MAX_DEPTH'] || config.fetch('ROLE_MAX_DEPTH', 3))
+      end
+
       # private
 
       def self.optional_array_options

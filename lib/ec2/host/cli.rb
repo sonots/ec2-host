@@ -31,15 +31,11 @@ class EC2
         op.on('-r', '--role one,two,three', Array, "role") {|v|
           opts[:role] = v
         }
-        op.on('--r1', '--role1 one,two,three', Array, "role1, the 1st part of role delimited by #{Config.role_tag_delimiter}") {|v|
-          opts[:role1] = v
-        }
-        op.on('--r2', '--role2 one,two,three', Array, "role2, the 2st part of role delimited by #{Config.role_tag_delimiter}") {|v|
-          opts[:role2] = v
-        }
-        op.on('--r3', '--role3 one,two,three', Array, "role3, the 3st part of role delimited by #{Config.role_tag_delimiter}") {|v|
-          opts[:role3] = v
-        }
+        1.upto(Config.role_max_depth).each do |i|
+          op.on("--r#{i}", "--role#{i} one,two,three", Array, "role#{i}, #{i}th part of role delimited by #{Config.role_tag_delimiter}") {|v|
+            opts["role#{i}".to_sym] = v
+          }
+        end
         op.on('--instance-id one,two,three', Array, "instance_id") {|v|
           opts[:instance_id] = v
         }
@@ -55,8 +51,11 @@ class EC2
           }
         end
         op.on('-a', '--all', "list all hosts (remove default filter)") {|v|
-          [:hostname, :role, :role1, :role2, :role3, :instance_id, :state, :monitoring].each do |key|
+          [:hostname, :role, :instance_id, :state, :monitoring].each do |key|
             opts.delete(key)
+          end
+          1.upto(Config.role_max_depth).each do |i|
+            opts.delete("role#{i}".to_sym)
           end
           Config.optional_options.each do |opt, tag|
             opts.delete(opt.to_sym)

@@ -2,40 +2,43 @@ class EC2
   class Host
     # Represents each role
     class RoleData
-      attr_reader :role1, :role2, :role3
-
-      def initialize(role1, role2 = nil, role3 = nil)
-        @role1 = role1
-        @role2 = role2
-        @role3 = role3
+      def initialize(*parts)
+        @parts = parts
       end
 
       def self.build(role)
-        role1, role2, role3 = role.split(Config.role_tag_delimiter, 3)
-        new(role1, role2, role3)
+        parts = role.split(Config.role_tag_delimiter, Config.role_max_depth)
+        new(*parts)
       end
 
       # @return [String] something like "admin:jenkins:slave"
       def role
-        @role ||= [role1, role2, role3].compact.reject(&:empty?).join(Config.role_tag_delimiter)
+        @role ||= @parts.compact.reject(&:empty?).join(Config.role_tag_delimiter)
       end
       alias :to_s :role
 
-      # @return [Array] something like ["admin", "admin:jenkins", "admin:jenkins:slave"]
-      def uppers
-        uppers = [RoleData.new(role1)]
-        uppers << RoleData.new(role1, role2) if role2 and !role2.empty?
-        uppers << RoleData.new(role1, role2, role3) if role3 and !role3.empty?
-        uppers
+      1.upto(Config.role_max_depth).each do |i|
+        define_method("role#{i}") do
+          @parts[i-1]
+        end
       end
 
-      def match?(role1, role2 = nil, role3 = nil)
-        if role3
-          role1 == self.role1 and role2 == self.role2 and role3 == self.role3
-        elsif role2
-          role1 == self.role1 and role2 == self.role2
-        else
-          role1 == self.role1
+      # @return [Array] something like ["admin", "admin:jenkins", "admin:jenkins:slave"]
+      def uppers
+        parts = @parts.dup
+        upper_parts = []
+        upper_parts << [parts.shift]
+        parts.each do |part|
+          break if part.nil? or part.empty?
+          upper_parts << [*(upper_parts.last), part]
+        end
+        upper_parts.map {|parts| RoleData.new(*parts) }
+      end
+
+      def match?(*parts)
+        (Config.role_max_depth-1).downto(0).each do |i|
+          next unless parts[i]
+          return @parts[0..i] == parts[0..i]
         end
       end
 
