@@ -1,3 +1,9 @@
+# 0.5.1 (2016/12/02)
+
+Fixes:
+
+* Fix role matching for when --role1 was not specified
+
 # 0.5.0 (2016/12/01)
 
 Enhancements:
