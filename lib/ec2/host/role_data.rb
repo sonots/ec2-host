@@ -51,13 +51,13 @@ class EC2
       #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins') #=> true
       #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins', 'slave') #=> true
       #     RoleData.new('admin', 'jenkins', 'slave').match?('admin', 'jenkins', 'master') #=> false
+      #     RoleData.new('admin', 'jenkins', 'slave').match?(nil, 'jenkins') #=> true
+      #     RoleData.new('admin', 'jenkins', 'slave').match?(nil, nil, 'slave') #=> true
       #
       # @param [Array] role_parts such as ["admin", "jenkins", "slave"]
       def match?(*role_parts)
-        (Config.role_max_depth-1).downto(0).each do |i|
-          next unless role_parts[i]
-          return @role_parts[0..i] == role_parts[0..i]
-        end
+        indexes = role_parts.map.with_index {|part, i| part ? i : nil }.compact
+        @role_parts.values_at(*indexes) == role_parts.values_at(*indexes)
       end
 
       # Equality

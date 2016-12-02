@@ -186,10 +186,7 @@ class EC2
             (condition["role#{i}".to_sym] || condition["usage#{i}".to_sym] || []).first
           end
         end
-        if parts.first
-          return false unless roles.find {|role| role.match?(*parts) }
-        end
-        true
+        roles.find {|role| role.match?(*parts) }
       end
 
       def instance_match?(condition)
