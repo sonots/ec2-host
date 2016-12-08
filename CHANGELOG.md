@@ -1,3 +1,9 @@
+# 0.5.2 (2016/12/08)
+
+Changes:
+
+* gem.add_runtime_dependency 'aws-sdk', "< 3.0.0"
+
 # 0.5.1 (2016/12/02)
 
 Fixes:
