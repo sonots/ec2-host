@@ -212,7 +212,7 @@ class EC2
         v
       end
 
-      # compatibility with dono-host
+      # compatibility with dino-host
       #
       # If Service,Status,Tags tags are defined
       #
