@@ -79,12 +79,12 @@ class EC2
         instance.placement.availability_zone
       end
 
-      def spot?
-        instance.instance_lifecycle == 'spot'
+      def instance_lifecycle
+        instance.instance_lifecycle
       end
 
-      def dedicated?
-        instance.placement.tenancy == 'dedicated'
+      def tenancy
+        instance.placement.tenancy
       end
 
       # compatibility with dino-host
@@ -114,7 +114,7 @@ class EC2
         state == "stopping"
       end
 
-      def stopped
+      def stopped?
         state == "stopped"
       end
 
@@ -124,6 +124,14 @@ class EC2
 
       def pending?
         state == "pending"
+      end
+
+      def spot?
+        instance_lifecycle == 'spot'
+      end
+
+      def dedicated?
+        tenancy == 'dedicated'
       end
 
       # match with condition or not
@@ -159,8 +167,9 @@ class EC2
           "launch_time" => launch_time,
           "state" => state,
           "monitoring" => monitoring,
-          "spot" => spot?,
         )
+        params["instance_lifecycle"] = instance_lifecycle if instance_lifecycle
+        params
       end
 
       def info
