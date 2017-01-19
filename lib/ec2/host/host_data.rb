@@ -75,6 +75,18 @@ class EC2
         instance.monitoring.state
       end
 
+      def availability_zone
+        instance.placement.availability_zone
+      end
+
+      def spot?
+        instance.instance_lifecycle == 'spot'
+      end
+
+      def dedicated?
+        instance.placement.tenancy == 'dedicated'
+      end
+
       # compatibility with dino-host
       def ip
         private_ip_address
@@ -139,6 +151,7 @@ class EC2
         end
         params.merge!(
           "region" => region,
+          "availability_zone" => availability_zone,
           "instance_id" => instance_id,
           "instance_type" => instance_type,
           "private_ip_address" => private_ip_address,
@@ -146,6 +159,7 @@ class EC2
           "launch_time" => launch_time,
           "state" => state,
           "monitoring" => monitoring,
+          "spot" => spot?,
         )
       end
 
