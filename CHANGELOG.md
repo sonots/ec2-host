@@ -1,3 +1,13 @@
+# 0.5.4 (2017/01/19)
+
+Enhancements:
+
+* Add --spot and --no-spot option
+
+Fixes:
+
+* Show instances whose roles are empty
+
 # 0.5.3 (2017/01/19)
 
 Enhancements:
