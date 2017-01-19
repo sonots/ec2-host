@@ -1,3 +1,9 @@
+# 0.5.3 (2017/01/19)
+
+Enhancements:
+
+* Add `availability_zone` and `spot?`
+
 # 0.5.2 (2016/12/08)
 
 Changes:
