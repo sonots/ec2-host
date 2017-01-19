@@ -5,6 +5,7 @@ shared_examples_for 'host' do
     [ :hostname,
       :roles,
       :region,
+      :availability_zone,
       :service,
       :status,
       :tags,
@@ -15,6 +16,7 @@ shared_examples_for 'host' do
       :launch_time,
       :state,
       :monitoring,
+      :spot,
       :ip,
       :start_date,
       :usages,
@@ -50,13 +52,15 @@ describe EC2::Host do
         'status',
         'tags',
         'region',
+        'availability_zone',
         'instance_id',
         'instance_type',
         'private_ip_address',
         'public_ip_address',
         'launch_time',
         'state',
-        'monitoring'
+        'monitoring',
+        'spot',
       ])
     end
 

@@ -26,6 +26,10 @@ class EC2
       def self.singularize(string)
         string.chomp('s')
       end
+
+      def self.stringify_symbols(array)
+        array.map {|e| e.is_a?(Symbol) ? e.to_s : e }
+      end
     end
   end
 end

@@ -45,6 +45,9 @@ class EC2
         op.on('--monitoring one,two,three', Array, "filter with instance monitoring") {|v|
           opts[:monitoring] = v
         }
+        op.on('--[no-]spot', "filter to spot or non-spot instances") {|v|
+          opts[:spot] = v
+        }
         Config.optional_options.each do |opt, tag|
           op.on("--#{opt.to_s.gsub('_', '-')} one,two,three", Array, opt) {|v|
             opts[opt.to_sym] = v

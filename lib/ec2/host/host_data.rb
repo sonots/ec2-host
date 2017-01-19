@@ -75,16 +75,20 @@ class EC2
         instance.monitoring.state
       end
 
+      def placement
+        instance.placement
+      end
+
       def availability_zone
         instance.placement.availability_zone
       end
 
-      def instance_lifecycle
-        instance.instance_lifecycle
-      end
-
       def tenancy
         instance.placement.tenancy
+      end
+
+      def instance_lifecycle
+        instance.instance_lifecycle
       end
 
       # compatibility with dino-host
@@ -129,10 +133,12 @@ class EC2
       def spot?
         instance_lifecycle == 'spot'
       end
+      alias :spot :spot?
 
       def dedicated?
         tenancy == 'dedicated'
       end
+      alias :dedicated :dedicated?
 
       # match with condition or not
       #
@@ -167,9 +173,8 @@ class EC2
           "launch_time" => launch_time,
           "state" => state,
           "monitoring" => monitoring,
+          "spot" => spot,
         )
-        params["instance_lifecycle"] = instance_lifecycle if instance_lifecycle
-        params
       end
 
       def info
