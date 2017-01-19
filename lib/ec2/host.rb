@@ -92,7 +92,7 @@ class EC2
       raise ArgumentError, "Hash expected (options)" unless @options.is_a?(Hash)
       @conditions = []
       conditions.each do |condition|
-        @conditions << Hash[condition.map {|k, v| [k, Array(v).map(&:to_s)]}]
+        @conditions << Hash[condition.map {|k, v| [k, StringUtil.stringify_symbols(Array(v))]}]
       end
       raise ArgumentError, "Array of Hash, or Hash expected (conditions)" unless @conditions.all? {|h| h.kind_of?(Hash)}
     end
