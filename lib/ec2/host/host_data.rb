@@ -159,6 +159,7 @@ class EC2
           "launch_time" => launch_time,
           "state" => state,
           "monitoring" => monitoring,
+          "spot" => spot?,
         )
       end
 
