@@ -1,3 +1,9 @@
+# 0.5.5 (2017/01/20)
+
+Enhancements:
+
+* cil: sort_by hostname
+
 # 0.5.4 (2017/01/19)
 
 Enhancements:
