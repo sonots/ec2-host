@@ -88,6 +88,10 @@ class EC2
         op.on('-h', '--help', "show help") {|v|
           opts[:help] = v
         }
+        op.on('-v', '--version', "show version") {|v|
+          puts EC2::Host::VERSION
+          exit 0
+        }
 
         begin
           args = op.parse(argv)
