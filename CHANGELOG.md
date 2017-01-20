@@ -1,3 +1,9 @@
+# 0.5.6 (2017/01/20)
+
+Enhancements:
+
+* Add --version option
+
 # 0.5.5 (2017/01/20)
 
 Enhancements:
