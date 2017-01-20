@@ -103,7 +103,7 @@ class EC2
       end
 
       def run
-        hosts = EC2::Host.new(condition)
+        hosts = EC2::Host.new(condition).sort_by {|host| host.hostname }
         if options[:info]
           hosts.each do |host|
             $stdout.puts host.info
