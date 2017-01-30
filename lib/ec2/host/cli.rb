@@ -39,7 +39,7 @@ class EC2
         op.on('--instance-id one,two,three', Array, "instance_id") {|v|
           opts[:instance_id] = v
         }
-        op.on('--state one,two,three', Array, "filter with instance state (default: running)") {|v|
+        op.on('--state one,two,three', Array, "filter with instance state such as running, stopped (default: running)") {|v|
           opts[:state] = v
         }
         op.on('--monitoring one,two,three', Array, "filter with instance monitoring") {|v|
