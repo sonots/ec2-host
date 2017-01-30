@@ -1,3 +1,9 @@
+# 0.5.7 (2017/01/30)
+
+Enhancements:
+
+* Enhance cli help message
+
 # 0.5.6 (2017/01/20)
 
 Enhancements:
