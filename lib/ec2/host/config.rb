@@ -129,7 +129,6 @@ class EC2
       def self.config
         return @config if @config
         @config = {}
-
         if File.exist?(config_file)
           File.readlines(config_file).each do |line|
             next if line.start_with?('#')

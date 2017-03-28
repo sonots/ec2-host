@@ -182,7 +182,7 @@ Install terraform and run to create instances for tests
 ```
 $ brew install terraform
 $ env $(cat .env) terraform plan
-$ env ($cat .env) terraform apply
+$ env $(cat .env) terraform apply
 ```
 
 Run test
