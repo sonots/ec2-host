@@ -129,10 +129,12 @@ class EC2
       def self.config
         return @config if @config
         @config = {}
-        File.readlines(config_file).each do |line|
-          next if line.start_with?('#')
-          key, val = line.chomp.split('=', 2)
-          @config[key] = val
+        if File.exist?(config_file)
+          File.readlines(config_file).each do |line|
+            next if line.start_with?('#')
+            key, val = line.chomp.split('=', 2)
+            @config[key] = val
+          end
         end
         @config
       end
