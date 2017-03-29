@@ -1,3 +1,9 @@
+# 0.5.8 (2017/03/29)
+
+Changes:
+
+* Avoid no config file error (thanks to bob1983)
+
 # 0.5.7 (2017/01/30)
 
 Enhancements:
