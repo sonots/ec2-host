@@ -251,7 +251,7 @@ class EC2
       # show in short format, otherwise, same with to_hash.to_s
       def self.display_short_info?
         return @display_short_info unless @display_short_info.nil?
-        @display_short_info = method_defined?(:service) and method_defined?(:status) and method_defined?(:tags)
+        @display_short_info = (method_defined?(:service) and method_defined?(:status) and method_defined?(:tags))
       end
     end
   end
