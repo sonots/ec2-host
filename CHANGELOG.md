@@ -1,3 +1,11 @@
+# 0.6.0 (2017/05/20)
+
+Fixes:
+
+* Fix to support multile roles and roleNs with command line arguments as
+  * ec2-host --role foo:a,bar:b
+  * ec2-host --role1 foo,bar --role2 a,b
+
 # 0.5.9 (2017/04/24)
 
 Fixes:
