@@ -29,12 +29,40 @@ describe EC2::Host::RoleData do
   end
 
   describe '#match?' do
-    let(:subject) { EC2::Host::RoleData.build('web:test') }
-    it do
-      expect(subject.match?('web')).to be_truthy
-      expect(subject.match?('web', 'test')).to be_truthy
-      expect(subject.match?('web', 'test', 'wrong')).to be_falsey
-      expect(subject.match?('web', 'wrong')).to be_falsey
+    context 'with single match' do
+      let(:subject) { EC2::Host::RoleData.build('admin:jenkins:slave') }
+
+      it do
+        expect(subject.match?('admin')).to be_truthy
+        expect(subject.match?('admin', 'jenkins')).to be_truthy
+        expect(subject.match?('admin', 'jenkins', 'slave')).to be_truthy
+        expect(subject.match?(nil, 'jenkins')).to be_truthy
+        expect(subject.match?(nil, nil, 'slave')).to be_truthy
+
+        expect(subject.match?('wrong')).to be_falsey
+        expect(subject.match?('admin', 'wrong')).to be_falsey
+        expect(subject.match?('admin', 'jenkins', 'wrong')).to be_falsey
+        expect(subject.match?(nil, 'wrong')).to be_falsey
+        expect(subject.match?(nil, nil, 'wrong')).to be_falsey
+      end
+    end
+
+
+    context 'with array match' do
+      it do
+        expect(EC2::Host::RoleData.build('foo:a').match?(['foo', 'bar'])).to be_truthy
+        expect(EC2::Host::RoleData.build('bar:a').match?(['foo', 'bar'])).to be_truthy
+        expect(EC2::Host::RoleData.build('baz:a').match?(['foo', 'bar'])).to be_falsey
+
+        expect(EC2::Host::RoleData.build('foo:a').match?(['foo', 'bar'], ['a', 'b'])).to be_truthy
+        expect(EC2::Host::RoleData.build('bar:a').match?(['foo', 'bar'], ['a', 'b'])).to be_truthy
+        expect(EC2::Host::RoleData.build('baz:a').match?(['foo', 'bar'], ['a', 'b'])).to be_falsey
+        expect(EC2::Host::RoleData.build('foo:b').match?(['foo', 'bar'], ['a', 'b'])).to be_truthy
+        expect(EC2::Host::RoleData.build('bar:b').match?(['foo', 'bar'], ['a', 'b'])).to be_truthy
+        expect(EC2::Host::RoleData.build('baz:b').match?(['foo', 'bar'], ['a', 'b'])).to be_falsey
+
+        expect(EC2::Host::RoleData.build('foo:a').match?(nil, ['a', 'b'])).to be_truthy
+      end
     end
   end
 end

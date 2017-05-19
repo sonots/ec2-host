@@ -208,14 +208,18 @@ class EC2
       def role_match?(condition)
         # usage is an alias of role
         if role = (condition[:role] || condition[:usage])
-          parts = role.first.split(Config.role_tag_delimiter, Config.role_max_depth)
+          role.any? do |r|
+            parts = r.split(Config.role_tag_delimiter, Config.role_max_depth)
+            next true if parts.compact.empty? # no role conditions
+            roles.find {|role| role.match?(*parts) }
+          end
         else
           parts = 1.upto(Config.role_max_depth).map do |i|
-            (condition["role#{i}".to_sym] || condition["usage#{i}".to_sym] || []).first
+            condition["role#{i}".to_sym] || condition["usage#{i}".to_sym]
           end
+          return true if parts.compact.empty? # no role conditions
+          roles.find {|role| role.match?(*parts) }
         end
-        return true if parts.compact.empty? # no role conditions
-        roles.find {|role| role.match?(*parts) }
       end
 
       def instance_match?(condition)
