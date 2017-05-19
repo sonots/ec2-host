@@ -56,11 +56,14 @@ class EC2
       #
       #     RoleData.new('foo', 'a').match?(['foo', 'bar']) #=> true
       #     RoleData.new('bar', 'a').match?(['foo', 'bar']) #=> true
+      #     RoleData.new('baz', 'a').match?(['foo', 'bar']) #=> false
       #
       #     RoleData.new('foo', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> true
-      #     RoleData.new('foo', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('bar', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('baz', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> false
+      #     RoleData.new('foo', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> true
       #     RoleData.new('bar', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> true
-      #     RoleData.new('bar', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('baz', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> false
       #
       # @param [Array] role_parts such as ["admin", "jenkins", "slave"]
       def match?(*role_parts)
