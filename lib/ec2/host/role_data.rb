@@ -54,10 +54,18 @@ class EC2
       #     RoleData.new('admin', 'jenkins', 'slave').match?(nil, 'jenkins') #=> true
       #     RoleData.new('admin', 'jenkins', 'slave').match?(nil, nil, 'slave') #=> true
       #
+      #     RoleData.new('foo', 'a').match?(['foo', 'bar']) #=> true
+      #     RoleData.new('bar', 'a').match?(['foo', 'bar']) #=> true
+      #
+      #     RoleData.new('foo', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('foo', 'a').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('bar', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #     RoleData.new('bar', 'b').match?(['foo', 'bar'], ['a', 'b']) #=> true
+      #
       # @param [Array] role_parts such as ["admin", "jenkins", "slave"]
       def match?(*role_parts)
         indexes = role_parts.map.with_index {|part, i| part ? i : nil }.compact
-        @role_parts.values_at(*indexes) == role_parts.values_at(*indexes)
+        indexes.all? {|i| Array(role_parts[i]).include?(@role_parts[i]) }
       end
 
       # Equality
