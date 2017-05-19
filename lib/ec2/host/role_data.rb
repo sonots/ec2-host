@@ -57,7 +57,7 @@ class EC2
       # @param [Array] role_parts such as ["admin", "jenkins", "slave"]
       def match?(*role_parts)
         indexes = role_parts.map.with_index {|part, i| part ? i : nil }.compact
-        @role_parts.values_at(*indexes) == role_parts.values_at(*indexes)
+        !(@role_parts.values_at(*indexes) & role_parts.values_at(*indexes).flatten).empty?
       end
 
       # Equality

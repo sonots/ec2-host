@@ -211,7 +211,7 @@ class EC2
           parts = role.first.split(Config.role_tag_delimiter, Config.role_max_depth)
         else
           parts = 1.upto(Config.role_max_depth).map do |i|
-            (condition["role#{i}".to_sym] || condition["usage#{i}".to_sym] || []).first
+            (condition["role#{i}".to_sym] || condition["usage#{i}".to_sym] || nil)
           end
         end
         return true if parts.compact.empty? # no role conditions
