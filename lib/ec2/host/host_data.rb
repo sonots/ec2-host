@@ -144,7 +144,9 @@ class EC2
       #
       # @param [Hash] condition search parameters
       def match?(condition)
-        return false if !condition[:state] and (terminated? or shutting_down?)
+        if condition[:state].nil?
+          return false if (terminated? or shutting_down?)
+        end
         return false unless role_match?(condition)
         return false unless instance_match?(condition)
         true
