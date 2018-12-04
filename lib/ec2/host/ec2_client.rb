@@ -1,5 +1,5 @@
 require 'net/http'
-require 'aws-sdk'
+require 'aws-sdk-ec2'
 
 class EC2
   class Host
