@@ -1,5 +1,5 @@
 require 'pp'
-require 'aws-sdk'
+require 'aws-sdk-ec2'
 require 'dotenv'
 Dotenv.load
 
