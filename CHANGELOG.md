@@ -1,6 +1,6 @@
 # 1.0.0 (2018/12/04)
 
-Changes:
+Breaking changes:
 
 * Upgrade aws-sdk to v3, using aws-sdk-ec2.
 
