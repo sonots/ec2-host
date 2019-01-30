@@ -43,11 +43,12 @@ class EC2
             profile_name: Config.aws_profile,
             path: Config.aws_credential_file
           )
-          profile = Aws.shared_config.instance_variable_get(:@parsed_config)[Config.aws_profile]
-          if profile['credential_source'] == 'Ec2InstanceMetadata'
+          config = Aws.shared_config.instance_variable_get(:@parsed_config)[Config.aws_profile]
+          credentials = Aws.shared_config.instance_variable_get(:@parsed_credentials)[Config.aws_profile]
+          if credentials['credential_source'] == 'Ec2InstanceMetadata'
             Aws::InstanceProfileCredentials.new
-          elsif profile['role_arn']
-            assume_role_credentials(shared_credentials, profile['role_arn'])
+          elsif config['role_arn']
+            assume_role_credentials(shared_credentials, config['role_arn'])
           else
             shared_credentials
           end
