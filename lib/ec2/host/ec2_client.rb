@@ -38,29 +38,21 @@ class EC2
       def credentials
         if Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
-        else # use profile
-          shared_credentials = Aws::SharedCredentials.new(
-            profile_name: Config.aws_profile,
-            path: Config.aws_credential_file
-          )
-          config = Aws.shared_config.instance_variable_get(:@parsed_config)[Config.aws_profile]
-          credentials = Aws.shared_config.instance_variable_get(:@parsed_credentials)[Config.aws_profile]
-          if credentials['credential_source'] == 'Ec2InstanceMetadata'
-            Aws::InstanceProfileCredentials.new
-          elsif config['role_arn']
-            assume_role_credentials(shared_credentials, config['role_arn'])
+        else
+          config = Config.aws_config
+          if config[:role_arn]
+            Aws::AssumeRoleCredentials.new(
+              client: Aws::STS::Client.new(config.config_hash),
+              role_arn: config[:role_arn],
+              role_session_name: "ec2-host-session-#{Time.now.to_i}"
+            )
           else
-            shared_credentials
+            Aws::SharedCredentials.new(
+              profile_name: Config.aws_profile,
+              path: Config.aws_credential_file
+            )
           end
         end
-      end
-
-      def assume_role_credentials(shared_credentials, role_arn)
-        Aws::AssumeRoleCredentials.new(
-          client: Aws::STS::Client.new(region: Config.aws_region, credentials: shared_credentials),
-          role_arn: role_arn,
-          role_session_name: Config.aws_profile
-        )
       end
 
       def build_filters(condition)

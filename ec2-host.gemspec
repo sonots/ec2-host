@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'aws-sdk-ec2'
   gem.add_runtime_dependency 'dotenv'
-  gem.add_runtime_dependency 'inifile'
+  gem.add_runtime_dependency 'aws_config'
 
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'rdoc'
