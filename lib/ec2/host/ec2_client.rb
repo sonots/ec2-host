@@ -46,6 +46,8 @@ class EC2
               role_arn: config[:role_arn],
               role_session_name: "ec2-host-session-#{Time.now.to_i}"
             )
+          elsif config[:credential_source] == "Ec2InstanceMetadata"
+            Aws::InstanceProfileCredentials.new
           else
             Aws::SharedCredentials.new(
               profile_name: Config.aws_profile,
