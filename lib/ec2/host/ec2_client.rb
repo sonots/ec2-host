@@ -39,14 +39,14 @@ class EC2
         if Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
         else
-          config = Config.aws_config
-          if config[:role_arn]
+          aws_config = Config.aws_config
+          if aws_config[:role_arn]
             Aws::AssumeRoleCredentials.new(
-              client: Aws::STS::Client.new(config.config_hash),
-              role_arn: config[:role_arn],
+              client: Aws::STS::Client.new(aws_config.config_hash),
+              role_arn: aws_config[:role_arn],
               role_session_name: "ec2-host-session-#{Time.now.to_i}"
             )
-          elsif config[:credential_source] == "Ec2InstanceMetadata"
+          elsif aws_config[:credential_source] == "Ec2InstanceMetadata"
             Aws::InstanceProfileCredentials.new
           else
             Aws::SharedCredentials.new(
