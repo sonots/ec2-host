@@ -54,8 +54,9 @@ class EC2
 
       def self.aws_credential_file
         @aws_credential_file ||=
-          ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) ||
-          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) || # ref. aws cli (supported lately)
+          ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) || # old
+          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) || # old
+          ENV['AWS_SHARED_CREDENTIALS_FILE'] || config.fetch('AWS_SHARED_CREDENTIALS_FILE', nil) || ref. https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-envvars.html
           File.expand_path('~/.aws/credentials')
       end
 
