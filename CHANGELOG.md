@@ -1,3 +1,11 @@
+# 1.0.2 (2019/02/05)
+
+Enhancements:
+
+* Support AWS\_SHARED\_CREDENTIALS\_FILE environment variable.
+* Support ~/.aws/config with instance profile.
+* Remove dependency on aws\_config gem.
+
 # 1.0.1 (2019/02/05)
 
 Enhancements:
