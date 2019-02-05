@@ -1,3 +1,9 @@
+# 1.0.1 (2019/02/05)
+
+Enhancements:
+
+* Support assume role credential and instance profile (thanks to @toyama0919)
+
 # 1.0.0 (2018/12/04)
 
 Breaking changes:
