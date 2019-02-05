@@ -25,7 +25,7 @@ AWS SDK (CLI) parameters:
 * **AWS_SECRET_ACCESS_KEY**: AWS SDK (CLI) credentials. Default load a credentials file
 * **AWS_DEFAULT_REGION** (**AWS_REGION**); AWS SDK (CLI) region such as `ap-northeast-1`, `us-east-1`. Default obtains from `$HOME/.aws/config` with profile `AWS_DEFAULT_PROFILE`.
 * **AWS_DEFAULT_PROFILE** (**AWS_PROFILE**): The profile key of the AWS SDK (CLI) credentails file. Default is `default`
-* **AWS_CREDENTIAL_FILE** (**AWS_CREDENTIALS_FILE**): Path of the AWS SDK (CLI) credentails file. Default is `$HOME/.aws/credentials`. See [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files) for details. 
+* **AWS_SHARED_CREDENTIALS_FILE** (**AWS_CREDENTIAL_FILE**, **AWS_CREDENTIALS_FILE**): Path of the AWS SDK (CLI) credentails file. Default is `$HOME/.aws/credentials`. See [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files) for details. 
 
 ec2-host parameters:
 
