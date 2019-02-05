@@ -1,5 +1,6 @@
 require 'net/http'
 require 'aws-sdk-ec2'
+require 'aws-sdk-sts'
 
 class EC2
   class Host
@@ -38,7 +39,21 @@ class EC2
         if Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
         else
-          Aws::SharedCredentials.new(profile_name: Config.aws_profile, path: Config.aws_credential_file)
+          aws_config = Config.aws_config
+          if aws_config[:role_arn]
+            Aws::AssumeRoleCredentials.new(
+              client: Aws::STS::Client.new(aws_config.config_hash),
+              role_arn: aws_config[:role_arn],
+              role_session_name: "ec2-host-session-#{Time.now.to_i}"
+            )
+          elsif aws_config[:credential_source] == "Ec2InstanceMetadata"
+            Aws::InstanceProfileCredentials.new
+          else
+            Aws::SharedCredentials.new(
+              profile_name: Config.aws_profile,
+              path: Config.aws_credential_file
+            )
+          end
         end
       end
 

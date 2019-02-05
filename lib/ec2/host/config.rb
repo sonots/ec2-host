@@ -1,5 +1,5 @@
-require 'inifile'
 require 'dotenv'
+require 'aws_config'
 Dotenv.load
 
 class EC2
@@ -65,13 +65,10 @@ class EC2
 
       def self.aws_config
         return @aws_config if @aws_config
-        if File.readable?(aws_config_file)
-          ini = IniFile.load(aws_config_file).to_h
-          if aws_profile == 'default'
-            @aws_config = ini['default']
-          else
-            @aws_config = ini["profile #{aws_profile}"]
-          end
+        if File.readable?(aws_config_file) && File.readable?(aws_credential_file)
+          AWSConfig.config_file = aws_config_file
+          AWSConfig.credentials_file = aws_credential_file
+          @aws_config = AWSConfig[aws_profile]
         end
         @aws_config ||= {}
       end
