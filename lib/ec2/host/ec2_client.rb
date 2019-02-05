@@ -35,25 +35,32 @@ class EC2
         @ec2 ||= Aws::EC2::Client.new(region: Config.aws_region, credentials: credentials)
       end
 
-      def credentials
-        if Config.aws_access_key_id and Config.aws_secret_access_key
+      def ec2_instance?
+        (not instance_id.nil?) rescue false
+      end
+
+      def raw_credentials
+        if Config.aws_config['credential_source'] == 'Ec2InstanceMetadata'
+          Aws::InstanceProfileCredentials.new
+        elsif Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
+        elsif File.readable?(Config.aws_credentials_file)
+          Aws::SharedCredentials.new(profile_name: Config.aws_profile, path: Config.aws_credentials_file)
+        elsif ec2_instance? # fallback to instance profile
+          Aws::InstanceProfileCredentials.new
+        end
+      end
+
+      def credentials
+        if Config.aws_config['role_arn']
+          # wrapped by assume role if necessary
+          Aws::AssumeRoleCredentials.new(
+            client: Aws::STS::Client.new(raw_credentials),
+            role_arn: Config.aws_config['role_arn'],
+            role_session_name: "ec2-host-session-#{Time.now.to_i}"
+          )
         else
-          aws_config = Config.aws_config
-          if aws_config[:role_arn]
-            Aws::AssumeRoleCredentials.new(
-              client: Aws::STS::Client.new(aws_config.config_hash),
-              role_arn: aws_config[:role_arn],
-              role_session_name: "ec2-host-session-#{Time.now.to_i}"
-            )
-          elsif aws_config[:credential_source] == "Ec2InstanceMetadata"
-            Aws::InstanceProfileCredentials.new
-          else
-            Aws::SharedCredentials.new(
-              profile_name: Config.aws_profile,
-              path: Config.aws_credentials_file
-            )
-          end
+          raw_credentials
         end
       end
 
