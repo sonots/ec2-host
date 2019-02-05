@@ -1,5 +1,5 @@
 require 'dotenv'
-require 'aws_config'
+require 'inifile'
 Dotenv.load
 
 class EC2
@@ -33,7 +33,7 @@ class EC2
         @aws_region ||=
           ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) || # ref. old aws cli
           ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION', nil) || # ref. aws cli and terraform
-          aws_config['region'] || raise('AWS_REGION nor AWS_DEFAULT_REGION is not set')
+          aws_config['region'] || raise('AWS_REGION nor AWS_DEFAULT_REGION nor reagion in ~/.aws/config is not set')
       end
 
       def self.aws_profile
@@ -69,10 +69,13 @@ class EC2
 
       def self.aws_config
         return @aws_config if @aws_config
-        if File.readable?(aws_config_file) && File.readable?(aws_credentials_file)
-          AWSConfig.config_file = aws_config_file
-          AWSConfig.credentials_file = aws_credentials_file
-          @aws_config = AWSConfig[aws_profile]
+        if File.readable?(aws_config_file)
+          ini = IniFile.load(aws_config_file).to_h
+          if aws_profile == 'default'
+            @aws_config = ini['default']
+          else
+            @aws_config = ini["profile #{aws_profile}"]
+          end
         end
         @aws_config ||= {}
       end
