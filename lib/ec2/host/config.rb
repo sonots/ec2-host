@@ -33,7 +33,7 @@ class EC2
         @aws_region ||=
           ENV['AWS_REGION'] || config.fetch('AWS_REGION', nil) || # ref. old aws cli
           ENV['AWS_DEFAULT_REGION'] || config.fetch('AWS_DEFAULT_REGION', nil) || # ref. aws cli and terraform
-          aws_config['region'] || raise('AWS_REGION nor AWS_DEFAULT_REGION nor reagion in ~/.aws/config is not set')
+          aws_config['region'] || raise('AWS_REGION nor AWS_DEFAULT_REGION nor region in ~/.aws/config is not set')
       end
 
       def self.aws_profile
