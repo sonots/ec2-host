@@ -51,7 +51,7 @@ class EC2
           else
             Aws::SharedCredentials.new(
               profile_name: Config.aws_profile,
-              path: Config.aws_credential_file
+              path: Config.aws_credentials_file
             )
           end
         end

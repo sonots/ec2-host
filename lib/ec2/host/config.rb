@@ -11,7 +11,7 @@ class EC2
           :aws_profile,
           :aws_access_key_id,
           :aws_secret_access_key,
-          :aws_credential_file,
+          :aws_credentials_file,
           :log_level,
           :hostname_tag,
           :roles_tag,
@@ -52,11 +52,15 @@ class EC2
         @aws_secret_access_key ||= ENV['AWS_SECRET_ACCESS_KEY'] || config.fetch('AWS_SECRET_ACCESS_KEY', nil)
       end
 
-      def self.aws_credential_file
-        @aws_credential_file ||=
-          ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) ||
-          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) || # ref. aws cli (supported lately)
+      def self.aws_credentials_file
+        @aws_credentials_file ||=
+          ENV['AWS_CREDENTIALS_FILE'] || config.fetch('AWS_CREDENTIALS_FILE', nil) || # old
+          ENV['AWS_CREDENTIAL_FILE'] || config.fetch('AWS_CREDENTIAL_FILE', nil) || # old
+          ENV['AWS_SHARED_CREDENTIALS_FILE'] || config.fetch('AWS_SHARED_CREDENTIALS_FILE', nil) || # ref. https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-envvars.html
           File.expand_path('~/.aws/credentials')
+      end
+      class << self
+        alias_method :aws_credential_file, :aws_credentials_file # for backward compatibility
       end
 
       def self.aws_config_file
@@ -65,9 +69,9 @@ class EC2
 
       def self.aws_config
         return @aws_config if @aws_config
-        if File.readable?(aws_config_file) && File.readable?(aws_credential_file)
+        if File.readable?(aws_config_file) && File.readable?(aws_credentials_file)
           AWSConfig.config_file = aws_config_file
-          AWSConfig.credentials_file = aws_credential_file
+          AWSConfig.credentials_file = aws_credentials_file
           @aws_config = AWSConfig[aws_profile]
         end
         @aws_config ||= {}
