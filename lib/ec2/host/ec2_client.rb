@@ -55,7 +55,7 @@ class EC2
         if Config.aws_config['role_arn']
           # wrapped by assume role if necessary
           Aws::AssumeRoleCredentials.new(
-            client: Aws::STS::Client.new(raw_credentials),
+            client: Aws::STS::Client.new(region: Config.aws_region, credentials: raw_credentials),
             role_arn: Config.aws_config['role_arn'],
             role_session_name: "ec2-host-session-#{Time.now.to_i}"
           )
