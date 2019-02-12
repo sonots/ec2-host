@@ -1,3 +1,9 @@
+# 1.0.3 (2019/02/12)
+
+Fixes:
+
+* Fix assume-role was not working (thanks to @toyama0910)
+
 # 1.0.2 (2019/02/05)
 
 Enhancements:
