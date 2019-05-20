@@ -40,7 +40,7 @@ class EC2
       end
 
       def raw_credentials
-        if Config.aws_config['credential_source'] == 'Ec2InstanceMetadata'
+        if Config.aws_credential['credential_source'] == 'Ec2InstanceMetadata' || Config.aws_credential.empty?
           Aws::InstanceProfileCredentials.new
         elsif Config.aws_access_key_id and Config.aws_secret_access_key
           Aws::Credentials.new(Config.aws_access_key_id, Config.aws_secret_access_key)
