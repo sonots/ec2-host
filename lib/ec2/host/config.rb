@@ -80,6 +80,15 @@ class EC2
         @aws_config ||= {}
       end
 
+      def self.aws_credential
+        return @aws_credential if @aws_credential
+        if File.readable?(aws_credentials_file)
+          ini = IniFile.load(aws_credentials_file).to_h
+          @aws_credential = ini[aws_profile]
+        end
+        @aws_credential ||= {}
+      end
+
       def self.log_level
         @log_level ||= ENV['LOG_LEVEL'] || config.fetch('LOG_LEVEL', 'info')
       end
